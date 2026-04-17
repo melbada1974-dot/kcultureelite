@@ -1,0 +1,12 @@
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Local preview screenshots
+kc-*.png
+
+# OS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/

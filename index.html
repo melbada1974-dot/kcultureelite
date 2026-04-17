@@ -155,41 +155,15 @@
       <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0A0A0A]"></div>
     </div>
 
-    <!-- Navigation -->
+    <!-- Navigation: Dual logo (Bada BLI left, Dongyang University right) -->
     <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 bg-transparent text-white py-0">
-      <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
-        <a href="/" class="hover:opacity-80 transition-opacity">
-          <img src="https://badabli.com/logo-white.png" alt="Bada BLI Logo" class="h-[60px] md:h-[80px] w-auto">
+      <div class="container mx-auto px-6 md:px-12 flex justify-between items-center py-3 md:py-4">
+        <a href="/" class="hover:opacity-80 transition-opacity flex items-center">
+          <img src="/assets/logo-white.png" alt="Bada BLI Logo" class="h-[66px] md:h-[88px] w-auto">
         </a>
-        <nav class="hidden md:flex space-x-10 text-sm font-medium tracking-widest uppercase">
-          <a href="https://badabli.com" class="relative group">
-            Home
-            <span class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="https://badabli.com/program.html" class="relative group">
-            Program
-            <span class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="/" class="relative group">
-            K-Culture
-            <span class="absolute -bottom-2 left-0 w-full h-0.5 bg-white transition-all duration-300"></span>
-          </a>
-          <a href="https://badabli.com/#footer" class="relative group">
-            CS
-            <span class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-          </a>
-        </nav>
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden text-white hover:text-gray-300 transition" onclick="document.getElementById('mobile-menu').classList.toggle('hidden');document.getElementById('mobile-menu').classList.toggle('flex');">
-          <i class="ph ph-list text-3xl"></i>
-        </button>
-      </div>
-      <!-- Mobile Menu Dropdown -->
-      <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-black/90 backdrop-blur-md shadow-xl border-t border-white/10 flex-col items-center py-6 space-y-4">
-        <a href="https://badabli.com" class="text-white text-lg font-medium tracking-widest uppercase">Home</a>
-        <a href="https://badabli.com/program.html" class="text-white text-lg font-medium tracking-widest uppercase">Program</a>
-        <a href="/" class="text-white text-lg font-medium tracking-widest uppercase">K-Culture</a>
-        <a href="https://badabli.com/#footer" class="text-white text-lg font-medium tracking-widest uppercase">CS</a>
+        <div class="flex items-center">
+          <img src="/assets/dongyang-logo.jpg" alt="Dongyang University Logo" class="h-[44px] md:h-[56px] w-auto object-contain rounded-xl shadow-md shadow-black/30 ring-1 ring-white/10">
+        </div>
       </div>
     </header>
 
@@ -371,7 +345,7 @@
         <!-- Photo -->
         <div class="flex-shrink-0">
           <img
-            src="/New%20Ricky%20Lee%20PIC.png"
+            src="/assets/ricky-lee.png"
             alt="Ricky Lee — Director, Bada BLI"
             class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-kc-accent/30"
           />
@@ -892,7 +866,7 @@
 
         <!-- Logo + Partner -->
         <div class="flex items-center gap-3">
-          <img src="/logo-white.png" alt="Bada BLI" class="h-6 w-auto object-contain" />
+          <img src="/assets/logo-white.png" alt="Bada BLI" class="h-10 md:h-12 w-auto object-contain" />
           <span class="text-white/40 text-sm font-light">× Dongyang University</span>
         </div>
 
