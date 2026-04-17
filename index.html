@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <title>Global K-Culture Elite Program | Bada BLI x Dongyang University</title>
+  <meta name="description" content="From Global Audition to Global Stage. Join the Global K-Culture Elite Program by Bada BLI and Dongyang University — your pathway to K-Pop, K-Drama, and the Korean entertainment industry." />
+  <meta name="keywords" content="K-Culture, K-Pop, Korean entertainment, global audition, Dongyang University, Bada BLI, Korean music, K-Drama, study in Korea" />
+  <meta name="author" content="Bada BLI" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://kcultureelite.com/" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kcultureelite.com/" />
+  <meta property="og:title" content="Global K-Culture Elite Program | Bada BLI x Dongyang University" />
+  <meta property="og:description" content="From Global Audition to Global Stage. Your pathway to K-Pop, K-Drama, and the Korean entertainment industry." />
+  <meta property="og:image" content="https://kcultureelite.com/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="K-Culture Elite Program" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Global K-Culture Elite Program | Bada BLI x Dongyang University" />
+  <meta name="twitter:description" content="From Global Audition to Global Stage. Your pathway to K-Pop, K-Drama, and the Korean entertainment industry." />
+  <meta name="twitter:image" content="https://kcultureelite.com/assets/og-image.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'kc-bg':           '#0A0A0A',
+            'kc-card':         '#111111',
+            'kc-border':       'rgba(255,255,255,0.1)',
+            'kc-accent':       '#A855F7',
+            'kc-accent-glow':  '#C084FC',
+            'kc-blue':         '#23508e',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4X4L6N4JJ7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-4X4L6N4JJ7');
+  </script>
+
+  <!-- Custom CSS Utilities -->
+  <style>
+    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .kc-glow { box-shadow: 0 0 30px rgba(168, 85, 247, 0.3); }
+    .kc-glow-hover:hover { box-shadow: 0 0 40px rgba(168, 85, 247, 0.5); }
+    .kc-text-gradient { background: linear-gradient(135deg, #A855F7, #3B82F6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .kc-reveal { opacity: 0; transform: translateY(40px); }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-open .faq-body { max-height: 300px; }
+    .faq-open .ph-caret-down { transform: rotate(180deg); }
+
+    /* Cursor Glow */
+    .cursor-glow {
+      position: fixed; width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
+      pointer-events: none; z-index: 1; transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+    @media (max-width: 768px) { .cursor-glow { display: none; } }
+
+    /* 3D Tilt + Spotlight */
+    [data-tilt] {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out, border-color 0.3s;
+      will-change: transform;
+    }
+    [data-tilt]:hover { border-color: rgba(168, 85, 247, 0.3); }
+    [data-tilt] .spotlight {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0;
+      transition: opacity 0.3s; border-radius: inherit;
+    }
+    [data-tilt]:hover .spotlight { opacity: 1; }
+
+    /* Enhanced hover transitions */
+    .kc-card-hover {
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .kc-card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(168, 85, 247, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(168, 85, 247, 0.1);
+    }
+
+    /* FAQ hover */
+    .faq-item:hover { background: rgba(255, 255, 255, 0.02); }
+
+    /* Button pulse animation for main CTA */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.6), 0 0 60px rgba(168, 85, 247, 0.2); }
+    }
+    .kc-pulse { animation: pulse-glow 2s ease-in-out infinite; }
+  </style>
+</head>
+
+<body class="bg-kc-bg text-white font-sans antialiased">
+
+  <!-- Cursor Glow -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- ============================================================
+       HERO SECTION
+       ============================================================ -->
+  <section id="hero" class="relative h-screen w-full overflow-hidden flex flex-col">
+
+    <!-- Background Video (loops infinitely, muted, no controls) -->
+    <div class="absolute inset-0 z-0">
+      <video
+        autoplay muted loop playsinline
+        poster="/bada%20bli%20hero%20sample%20pic.png"
+        class="w-full h-full object-cover object-center"
+      >
+        <source src="/assets/hero-video.mp4" type="video/mp4">
+      </video>
+      <!-- Dark Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0A0A0A]"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 bg-transparent text-white py-0">
+      <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+        <a href="/" class="hover:opacity-80 transition-opacity">
+          <img src="https://badabli.com/logo-white.png" alt="Bada BLI Logo" class="h-[60px] md:h-[80px] w-auto">
+        </a>
+        <nav class="hidden md:flex space-x-10 text-sm font-medium tracking-widest uppercase">
+          <a href="https://badabli.com" class="relative group">
+            Home
+            <span class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="https://badabli.com/program.html" class="relative group">
+            Program
+            <span class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="/" class="relative group">
+            K-Culture
+            <span class="absolute -bottom-2 left-0 w-full h-0.5 bg-white transition-all duration-300"></span>
+          </a>
+          <a href="https://badabli.com/#footer" class="relative group">
+            CS
+            <span class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        </nav>
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-white hover:text-gray-300 transition" onclick="document.getElementById('mobile-menu').classList.toggle('hidden');document.getElementById('mobile-menu').classList.toggle('flex');">
+          <i class="ph ph-list text-3xl"></i>
+        </button>
+      </div>
+      <!-- Mobile Menu Dropdown -->
+      <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-black/90 backdrop-blur-md shadow-xl border-t border-white/10 flex-col items-center py-6 space-y-4">
+        <a href="https://badabli.com" class="text-white text-lg font-medium tracking-widest uppercase">Home</a>
+        <a href="https://badabli.com/program.html" class="text-white text-lg font-medium tracking-widest uppercase">Program</a>
+        <a href="/" class="text-white text-lg font-medium tracking-widest uppercase">K-Culture</a>
+        <a href="https://badabli.com/#footer" class="text-white text-lg font-medium tracking-widest uppercase">CS</a>
+      </div>
+    </header>
+
+    <!-- Center Content -->
+    <div class="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 sm:px-10">
+
+      <!-- Subtitle -->
+      <p class="text-kc-accent-glow text-xs sm:text-sm md:text-base font-semibold tracking-[0.25em] sm:tracking-[0.35em] uppercase mb-4 sm:mb-6">
+        From Global Audition to Global Stage
+      </p>
+
+      <!-- H1 -->
+      <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight mb-6 sm:mb-8 max-w-5xl">
+        <span class="block text-white">GLOBAL K-CULTURE</span>
+        <span class="block kc-text-gradient">ELITE PROGRAM</span>
+      </h1>
+
+      <!-- Apply Now Button -->
+      <a
+        href="#apply"
+        data-magnetic
+        class="inline-flex items-center gap-2 bg-kc-accent hover:bg-kc-accent-glow text-white font-semibold text-sm sm:text-base px-8 sm:px-10 py-3 sm:py-4 rounded-full transition-all duration-300 kc-glow kc-glow-hover"
+        aria-label="Apply Now for the Global K-Culture Elite Program"
+      >
+        Apply Now
+        <i class="ph ph-arrow-right text-lg"></i>
+      </a>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="relative z-10 flex flex-col items-center pb-8 sm:pb-10 gap-2">
+      <span class="text-white/40 text-xs tracking-widest uppercase">Scroll</span>
+      <div class="animate-bounce">
+        <i class="ph ph-caret-down text-white/40 text-xl"></i>
+      </div>
+    </div>
+
+  </section>
+  <!-- END: HERO SECTION -->
+
+
+  <!-- ============================================================
+       SECTION 2: INDUSTRY PARTNERS
+       ============================================================ -->
+  <section id="partners" class="bg-kc-bg py-20 md:py-32">
+    <div class="max-w-6xl mx-auto px-6 sm:px-10">
+
+      <!-- Title -->
+      <div class="text-center mb-14 kc-reveal">
+        <p class="text-kc-accent text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-3">Trusted By The Best</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white">Industry Partners</h2>
+        <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mt-4">We maintain deep, active partnerships with the most powerful names in the Korean and global entertainment industry. These are not nominal affiliations — they translate into real-world access, field training, and placement opportunities.</p>
+      </div>
+
+      <!-- Logo Grid: 8 labels -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12 kc-reveal" data-stagger>
+        <!-- HYBE -->
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="text-white font-black text-lg sm:text-xl tracking-wider">HYBE</span>
+        </div>
+        <!-- SM -->
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="text-white font-black text-lg sm:text-xl tracking-wider">SM</span>
+        </div>
+        <!-- YG -->
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="text-white font-black text-lg sm:text-xl tracking-wider">YG</span>
+        </div>
+        <!-- JYP -->
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="text-white font-black text-lg sm:text-xl tracking-wider">JYP</span>
+        </div>
+        <!-- ADOR -->
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="text-white font-black text-lg sm:text-xl tracking-wider">ADOR</span>
+        </div>
+        <!-- THE BLACK LABEL -->
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="text-white font-bold text-sm sm:text-base tracking-wider text-center leading-tight">THE BLACK<br>LABEL</span>
+        </div>
+        <!-- STARSHIP -->
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="text-white font-black text-lg sm:text-xl tracking-wider">STARSHIP</span>
+        </div>
+        <!-- PLEDIS -->
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="text-white font-black text-lg sm:text-xl tracking-wider">PLEDIS</span>
+        </div>
+      </div>
+
+      <!-- Collaboration Types -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 kc-reveal" data-stagger>
+        <!-- Field Training -->
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-6 flex flex-col items-center text-center gap-3 kc-card-hover">
+          <div class="spotlight"></div>
+          <i class="ph ph-buildings text-kc-accent text-3xl"></i>
+          <h3 class="text-white font-bold text-base">Field Training</h3>
+          <p class="text-white/50 text-sm leading-relaxed">On-site experience inside top entertainment companies</p>
+        </div>
+        <!-- Internships -->
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-6 flex flex-col items-center text-center gap-3 kc-card-hover">
+          <div class="spotlight"></div>
+          <i class="ph ph-briefcase text-kc-accent text-3xl"></i>
+          <h3 class="text-white font-bold text-base">Internships</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Paid internship pathways with partner agencies</p>
+        </div>
+        <!-- Joint R&D -->
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-6 flex flex-col items-center text-center gap-3 kc-card-hover">
+          <div class="spotlight"></div>
+          <i class="ph ph-lightbulb text-kc-accent text-3xl"></i>
+          <h3 class="text-white font-bold text-base">Joint R&amp;D</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Collaborative research with industry leaders</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- END: INDUSTRY PARTNERS -->
+
+  <!-- ============================================================
+       SECTION 3: PROGRAM OVERVIEW
+       ============================================================ -->
+  <section id="program" class="bg-kc-card py-20 md:py-32">
+    <div class="max-w-5xl mx-auto px-6 sm:px-10">
+
+      <!-- Title -->
+      <div class="text-center mb-14 kc-reveal">
+        <p class="text-white/50 text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-3">The Program</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
+          4-Year Degree. 5 Industry Tracks.<br>
+          <span class="kc-text-gradient">1 Global Stage.</span>
+        </h2>
+      </div>
+
+      <!-- Description -->
+      <p class="text-white/60 text-center text-base sm:text-lg leading-relaxed max-w-3xl mx-auto mb-14 kc-reveal">
+        A revolutionary convergence of academic degree and industry practice. This audition-based programme transforms global talent into South Korean entertainment industry professionals across four transformative years — built at the intersection of academic rigour and real-world industry practice.
+      </p>
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-3 gap-4 sm:gap-6 kc-reveal" data-stagger>
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center gap-2 kc-card-hover">
+          <div class="spotlight"></div>
+          <span data-count="4" class="kc-text-gradient text-4xl sm:text-5xl font-black">4</span>
+          <span class="text-white/60 text-sm sm:text-base font-medium">Years</span>
+        </div>
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center gap-2 kc-card-hover">
+          <div class="spotlight"></div>
+          <span data-count="5" class="kc-text-gradient text-4xl sm:text-5xl font-black">5</span>
+          <span class="text-white/60 text-sm sm:text-base font-medium">Tracks</span>
+        </div>
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center gap-2 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="kc-text-gradient text-4xl sm:text-5xl font-black">8+</span>
+          <span class="text-white/60 text-sm sm:text-base font-medium">Partners</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- END: PROGRAM OVERVIEW -->
+
+  <!-- ============================================================
+       SECTION 4: DIRECTOR'S MESSAGE
+       ============================================================ -->
+  <section id="message" class="bg-kc-bg py-20 md:py-32">
+    <div class="max-w-5xl mx-auto px-6 sm:px-10">
+
+      <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 kc-reveal">
+
+        <!-- Photo -->
+        <div class="flex-shrink-0">
+          <img
+            src="/New%20Ricky%20Lee%20PIC.png"
+            alt="Ricky Lee — Director, Bada BLI"
+            class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-kc-accent/30"
+          />
+        </div>
+
+        <!-- Quote Block -->
+        <div class="flex flex-col gap-5 text-center md:text-left">
+          <i class="ph ph-quotes text-kc-accent text-3xl mx-auto md:mx-0"></i>
+          <p class="text-white/80 text-lg sm:text-xl leading-relaxed italic">
+            "This programme isn't just education — it's a launchpad. We're connecting the world's most passionate young talents directly with the architects of K-Pop. If you've dreamed of being part of this industry, this is your door."
+          </p>
+          <div>
+            <p class="text-white font-bold text-base">Ricky Lee</p>
+            <p class="text-kc-accent text-sm font-medium">Director, Bada BLI</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- END: DIRECTOR'S MESSAGE -->
+
+    <!-- ELITE FACULTY -->
+    <section id="faculty" class="py-20 md:py-32 bg-kc-card">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-12 md:mb-16 kc-reveal">
+                <p class="text-kc-accent text-sm tracking-[0.3em] uppercase mb-3">World-Class Mentors</p>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">Elite Faculty</h2>
+                <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">Learn from the architects of K-Pop, including legendary choreographers and producers who have shaped global icons.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto kc-reveal" data-stagger>
+                <div class="bg-kc-bg border border-kc-border rounded-2xl p-8 text-center kc-card-hover" data-tilt>
+                    <div class="spotlight"></div>
+                    <div class="w-16 h-16 rounded-full bg-kc-accent/10 flex items-center justify-center mx-auto mb-4">
+                        <i class="ph ph-microphone-stage text-2xl text-kc-accent"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Choreographers</h3>
+                    <p class="text-white/50 text-sm">Industry-leading choreographers who have created iconic routines for top K-Pop groups.</p>
+                </div>
+                <div class="bg-kc-bg border border-kc-border rounded-2xl p-8 text-center kc-card-hover" data-tilt>
+                    <div class="spotlight"></div>
+                    <div class="w-16 h-16 rounded-full bg-kc-accent/10 flex items-center justify-center mx-auto mb-4">
+                        <i class="ph ph-headphones text-2xl text-kc-accent"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Producers</h3>
+                    <p class="text-white/50 text-sm">Hit-making producers and composers behind chart-topping K-Pop tracks and albums.</p>
+                </div>
+                <div class="bg-kc-bg border border-kc-border rounded-2xl p-8 text-center kc-card-hover sm:col-span-2 lg:col-span-1" data-tilt>
+                    <div class="spotlight"></div>
+                    <div class="w-16 h-16 rounded-full bg-kc-accent/10 flex items-center justify-center mx-auto mb-4">
+                        <i class="ph ph-chalkboard-teacher text-2xl text-kc-accent"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Industry Veterans</h3>
+                    <p class="text-white/50 text-sm">Seasoned professionals from major agencies with decades of artist development experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+  <!-- END: ELITE FACULTY -->
+
+  <!-- ============================================================
+       SECTION 5: 5 TRACKS
+       ============================================================ -->
+  <section id="tracks" class="bg-kc-card py-20 md:py-32">
+    <div class="max-w-6xl mx-auto px-6 sm:px-10">
+
+      <!-- Title -->
+      <div class="text-center mb-14 kc-reveal">
+        <p class="text-kc-accent text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-3">Specializations</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white">5 Industry Tracks</h2>
+      </div>
+
+      <!-- Track Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 kc-reveal" data-stagger>
+
+        <!-- Track 1: K-Pop Business -->
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
+          <i class="ph ph-music-notes text-kc-accent text-3xl"></i>
+          <h3 class="text-white font-bold text-lg">K-Pop Business</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Artist management, fandom business, global production strategy</p>
+        </div>
+
+        <!-- Track 2: K-Performance -->
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
+          <i class="ph ph-microphone-stage text-kc-accent text-3xl"></i>
+          <h3 class="text-white font-bold text-lg">K-Performance</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Concert planning, stage production, performance branding</p>
+        </div>
+
+        <!-- Track 3: K-Beauty Business -->
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
+          <i class="ph ph-sparkle text-kc-accent text-3xl"></i>
+          <h3 class="text-white font-bold text-lg">K-Beauty Business</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Global beauty marketing, e-commerce, brand launching</p>
+        </div>
+
+        <!-- Track 4: K-Fusion Media & Content -->
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
+          <i class="ph ph-video-camera text-kc-accent text-3xl"></i>
+          <h3 class="text-white font-bold text-lg">K-Fusion Media &amp; Content</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Content planning, SNS marketing, YouTube business</p>
+        </div>
+
+        <!-- Track 5: Global Entertainment Startup (centered on tablet) -->
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 kc-card-hover sm:col-span-2 lg:col-span-1">
+          <div class="spotlight"></div>
+          <i class="ph ph-rocket-launch text-kc-accent text-3xl"></i>
+          <h3 class="text-white font-bold text-lg">Global Entertainment Startup</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Business modelling, IP business, platform entrepreneurship</p>
+        </div>
+
+      </div>
+
+      <!-- 4-Year Roadmap -->
+      <div class="kc-reveal">
+        <h3 class="text-center text-white font-bold text-xl mb-8">4-Year Roadmap</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" data-stagger>
+
+          <!-- Year 1 -->
+          <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3 kc-card-hover">
+            <div class="spotlight"></div>
+            <div class="w-10 h-10 rounded-full bg-kc-accent/20 flex items-center justify-center">
+              <span class="text-kc-accent font-black text-base">1</span>
+            </div>
+            <h4 class="text-white font-bold text-base">Year 1</h4>
+            <p class="text-white/50 text-sm">Fundamentals</p>
+            <p class="text-white/40 text-xs leading-relaxed">Korean language, K-Culture history, industry basics</p>
+          </div>
+
+          <!-- Year 2 -->
+          <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3 kc-card-hover">
+            <div class="spotlight"></div>
+            <div class="w-10 h-10 rounded-full bg-kc-accent/20 flex items-center justify-center">
+              <span class="text-kc-accent font-black text-base">2</span>
+            </div>
+            <h4 class="text-white font-bold text-base">Year 2</h4>
+            <p class="text-white/50 text-sm">Exploration</p>
+            <p class="text-white/40 text-xs leading-relaxed">Track exposure, field visits, cross-track projects</p>
+          </div>
+
+          <!-- Year 3 -->
+          <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3 kc-card-hover">
+            <div class="spotlight"></div>
+            <div class="w-10 h-10 rounded-full bg-kc-accent/20 flex items-center justify-center">
+              <span class="text-kc-accent font-black text-base">3</span>
+            </div>
+            <h4 class="text-white font-bold text-base">Year 3</h4>
+            <p class="text-white/50 text-sm">Deepening</p>
+            <p class="text-white/40 text-xs leading-relaxed">Specialist coursework, partner internship, capstone</p>
+          </div>
+
+          <!-- Year 4 -->
+          <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3 kc-card-hover">
+            <div class="spotlight"></div>
+            <div class="w-10 h-10 rounded-full bg-kc-accent/20 flex items-center justify-center">
+              <span class="text-kc-accent font-black text-base">4</span>
+            </div>
+            <h4 class="text-white font-bold text-base">Year 4</h4>
+            <p class="text-white/50 text-sm">Career Entry</p>
+            <p class="text-white/40 text-xs leading-relaxed">Industry placement, graduation project, job placement support</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- END: 5 TRACKS -->
+
+    <!-- HOW IT WORKS -->
+    <section id="howitworks" class="py-20 md:py-32 bg-kc-bg">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-12 md:mb-16 kc-reveal">
+                <p class="text-kc-accent text-sm tracking-[0.3em] uppercase mb-3">The Journey</p>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">How It Works</h2>
+                <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">A structured roadmap from worldwide auditions to specialised track training and a final debut system.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto kc-reveal" data-stagger>
+                <div class="relative bg-kc-card border border-kc-border rounded-2xl p-6 text-center kc-card-hover" data-tilt>
+                    <div class="spotlight"></div>
+                    <div class="w-12 h-12 rounded-full bg-kc-accent/20 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-kc-accent font-bold text-lg">1</span>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Global Audition</h3>
+                    <p class="text-white/40 text-sm">Submit a 3-minute performance video from anywhere in the world. Online first round.</p>
+                </div>
+                <div class="relative bg-kc-card border border-kc-border rounded-2xl p-6 text-center kc-card-hover" data-tilt>
+                    <div class="spotlight"></div>
+                    <div class="w-12 h-12 rounded-full bg-kc-accent/20 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-kc-accent font-bold text-lg">2</span>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">In-Person Evaluation</h3>
+                    <p class="text-white/40 text-sm">Shortlisted candidates are invited to on-site evaluations by Korean entertainment professionals in select countries.</p>
+                </div>
+                <div class="relative bg-kc-card border border-kc-border rounded-2xl p-6 text-center kc-card-hover" data-tilt>
+                    <div class="spotlight"></div>
+                    <div class="w-12 h-12 rounded-full bg-kc-accent/20 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-kc-accent font-bold text-lg">3</span>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Track Training</h3>
+                    <p class="text-white/40 text-sm">4 years of specialised training across your chosen industry track with real-world projects.</p>
+                </div>
+                <div class="relative bg-kc-card border border-kc-border rounded-2xl p-6 text-center kc-card-hover" data-tilt>
+                    <div class="spotlight"></div>
+                    <div class="w-12 h-12 rounded-full bg-kc-accent/20 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-kc-accent font-bold text-lg">4</span>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Career Launch</h3>
+                    <p class="text-white/40 text-sm">Graduate with a degree, industry network, and our 3-tier career safety net for guaranteed placement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+  <!-- END: HOW IT WORKS -->
+
+  <!-- ============================================================
+       SECTION 6: CAREER SAFETY NET
+       ============================================================ -->
+  <section id="career" class="bg-kc-bg py-20 md:py-32">
+    <div class="max-w-5xl mx-auto px-6 sm:px-10">
+
+      <!-- Title -->
+      <div class="text-center mb-14 kc-reveal">
+        <p class="text-white/50 text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-3">After Graduation</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white">
+          Your Career, <span class="kc-text-gradient">Guaranteed</span>
+        </h2>
+        <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mt-4">No graduate is left without direction. Our 3-Tier Career Safety Net is a structured, personalised framework that maps out every possible trajectory — from immediate industry employment to global entrepreneurship and advanced academic pursuits.</p>
+      </div>
+
+      <!-- Plan Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 kc-reveal" data-stagger>
+
+        <!-- Plan A -->
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-7 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-kc-accent/20 flex items-center justify-center flex-shrink-0">
+              <span class="text-kc-accent font-black text-sm">A</span>
+            </div>
+            <h3 class="text-white font-bold text-base">Plan A — Direct Entry</h3>
+          </div>
+          <p class="text-white/50 text-sm leading-relaxed">Join Korean agencies as A&amp;R, manager, PD, or marketing professional — through our partner network.</p>
+        </div>
+
+        <!-- Plan B -->
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-7 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-kc-accent/20 flex items-center justify-center flex-shrink-0">
+              <span class="text-kc-accent font-black text-sm">B</span>
+            </div>
+            <h3 class="text-white font-bold text-base">Plan B — Global Expansion</h3>
+          </div>
+          <p class="text-white/50 text-sm leading-relaxed">Work at international branches of Korean labels, or launch your own venture in your home market.</p>
+        </div>
+
+        <!-- Plan C -->
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-7 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-kc-accent/20 flex items-center justify-center flex-shrink-0">
+              <span class="text-kc-accent font-black text-sm">C</span>
+            </div>
+            <h3 class="text-white font-bold text-base">Plan C — Academic Path</h3>
+          </div>
+          <p class="text-white/50 text-sm leading-relaxed">Advance to graduate school (Arts Management) or cultural institutions and research careers.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+  <!-- END: CAREER SAFETY NET -->
+
+  <!-- ============================================================
+       SECTION 7: SCHOLARSHIP
+       ============================================================ -->
+  <section id="scholarship" class="bg-kc-card py-20 md:py-32">
+    <div class="max-w-3xl mx-auto px-6 sm:px-10 text-center">
+
+      <!-- Title -->
+      <div class="mb-12 kc-reveal">
+        <p class="text-kc-accent text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-3">Financial Support</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white">Invest in Your Future</h2>
+      </div>
+
+      <!-- Scholarship Card -->
+      <div class="bg-kc-bg border border-kc-border rounded-3xl p-10 sm:p-14 flex flex-col items-center gap-5 kc-glow kc-reveal">
+        <div class="kc-text-gradient text-7xl sm:text-8xl md:text-9xl font-black leading-none">100%</div>
+        <p class="text-white font-bold text-xl sm:text-2xl">Tuition Waiver Available</p>
+        <p class="text-white/50 text-sm sm:text-base max-w-md">For the full 4-year duration, based on audition performance</p>
+      </div>
+
+    </div>
+  </section>
+  <!-- END: SCHOLARSHIP -->
+
+  <!-- ============================================================
+       SECTION 8: FAQ
+       ============================================================ -->
+  <section id="faq" class="bg-kc-bg py-20 md:py-32">
+    <div class="max-w-3xl mx-auto px-6 sm:px-10">
+
+      <!-- Title -->
+      <div class="text-center mb-14 kc-reveal">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white">Frequently Asked Questions</h2>
+      </div>
+
+      <!-- FAQ Items -->
+      <div class="flex flex-col gap-4 kc-reveal">
+
+        <!-- FAQ 1 -->
+        <div class="bg-kc-card border border-kc-border rounded-2xl overflow-hidden">
+          <button
+            onclick="this.closest('.bg-kc-card').classList.toggle('faq-open')"
+            class="w-full flex items-center justify-between px-6 py-5 text-left"
+            aria-expanded="false"
+          >
+            <span class="text-white font-semibold text-sm sm:text-base">Do I need to speak Korean to apply?</span>
+            <i class="ph ph-caret-down text-white/40 text-lg transition-transform duration-300 flex-shrink-0 ml-4"></i>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-white/60 text-sm leading-relaxed">No Korean is required to apply. Year 1 includes dedicated Korean language courses, and introductory subjects are taught in English. Language proficiency will grow naturally throughout the program.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="bg-kc-card border border-kc-border rounded-2xl overflow-hidden">
+          <button
+            onclick="this.closest('.bg-kc-card').classList.toggle('faq-open')"
+            class="w-full flex items-center justify-between px-6 py-5 text-left"
+            aria-expanded="false"
+          >
+            <span class="text-white font-semibold text-sm sm:text-base">How do I get a student visa?</span>
+            <i class="ph ph-caret-down text-white/40 text-lg transition-transform duration-300 flex-shrink-0 ml-4"></i>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-white/60 text-sm leading-relaxed">Accepted students will require a D-2 student visa for South Korea. Dongyang University's international office provides all necessary documentation and guidance throughout the visa application process.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="bg-kc-card border border-kc-border rounded-2xl overflow-hidden">
+          <button
+            onclick="this.closest('.bg-kc-card').classList.toggle('faq-open')"
+            class="w-full flex items-center justify-between px-6 py-5 text-left"
+            aria-expanded="false"
+          >
+            <span class="text-white font-semibold text-sm sm:text-base">Is accommodation provided?</span>
+            <i class="ph ph-caret-down text-white/40 text-lg transition-transform duration-300 flex-shrink-0 ml-4"></i>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-white/60 text-sm leading-relaxed">Yes, on-campus dormitories are available for international students at Dongyang University. Applications are handled separately through the university's housing office after admission.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="bg-kc-card border border-kc-border rounded-2xl overflow-hidden">
+          <button
+            onclick="this.closest('.bg-kc-card').classList.toggle('faq-open')"
+            class="w-full flex items-center justify-between px-6 py-5 text-left"
+            aria-expanded="false"
+          >
+            <span class="text-white font-semibold text-sm sm:text-base">Is the $20 application fee refundable?</span>
+            <i class="ph ph-caret-down text-white/40 text-lg transition-transform duration-300 flex-shrink-0 ml-4"></i>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-white/60 text-sm leading-relaxed">The $20 USD application fee is non-refundable. It covers the cost of audition review by our panel and guarantees your application is personally evaluated.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="bg-kc-card border border-kc-border rounded-2xl overflow-hidden">
+          <button
+            onclick="this.closest('.bg-kc-card').classList.toggle('faq-open')"
+            class="w-full flex items-center justify-between px-6 py-5 text-left"
+            aria-expanded="false"
+          >
+            <span class="text-white font-semibold text-sm sm:text-base">What does the audition process look like?</span>
+            <i class="ph ph-caret-down text-white/40 text-lg transition-transform duration-300 flex-shrink-0 ml-4"></i>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-white/60 text-sm leading-relaxed">The process has two rounds: first, you submit a 3-minute video audition online. Shortlisted candidates are then invited to an in-person audition, where you'll present your passion for K-Culture and industry readiness.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="bg-kc-card border border-kc-border rounded-2xl overflow-hidden">
+          <button
+            onclick="this.closest('.bg-kc-card').classList.toggle('faq-open')"
+            class="w-full flex items-center justify-between px-6 py-5 text-left"
+            aria-expanded="false"
+          >
+            <span class="text-white font-semibold text-sm sm:text-base">Can I audition online?</span>
+            <i class="ph ph-caret-down text-white/40 text-lg transition-transform duration-300 flex-shrink-0 ml-4"></i>
+          </button>
+          <div class="faq-body">
+            <p class="px-6 pb-6 text-white/60 text-sm leading-relaxed">Yes. The first round is entirely online — you submit your 3-minute video from anywhere in the world. Only shortlisted applicants will be required to attend an in-person audition.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- END: FAQ -->
+
+  <!-- ============================================================
+       SECTION 9: APPLY + COUNTDOWN + PAYMENT
+       ============================================================ -->
+  <section id="apply" class="bg-kc-card py-20 md:py-32 relative overflow-hidden">
+    <!-- Subtle gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-kc-accent/5 via-transparent to-blue-600/5 pointer-events-none"></div>
+
+    <div class="relative max-w-4xl mx-auto px-6 sm:px-10 text-center">
+
+      <!-- Title -->
+      <div class="mb-12 kc-reveal">
+        <p class="text-kc-accent text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-3">Limited Spots</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white">
+          Your Journey <span class="kc-text-gradient">Starts Here</span>
+        </h2>
+      </div>
+
+      <!-- Countdown Timer -->
+      <div class="grid grid-cols-4 gap-3 sm:gap-5 mb-12 kc-reveal">
+        <!-- Days -->
+        <div class="bg-kc-bg border border-kc-accent/20 rounded-2xl p-4 sm:p-6 flex flex-col items-center gap-1">
+          <span id="cd-days" class="text-3xl md:text-5xl font-black text-white">--</span>
+          <span class="text-white/40 text-xs uppercase tracking-wider">Days</span>
+        </div>
+        <!-- Hours -->
+        <div class="bg-kc-bg border border-kc-accent/20 rounded-2xl p-4 sm:p-6 flex flex-col items-center gap-1">
+          <span id="cd-hours" class="text-3xl md:text-5xl font-black text-white">--</span>
+          <span class="text-white/40 text-xs uppercase tracking-wider">Hours</span>
+        </div>
+        <!-- Minutes -->
+        <div class="bg-kc-bg border border-kc-accent/20 rounded-2xl p-4 sm:p-6 flex flex-col items-center gap-1">
+          <span id="cd-mins" class="text-3xl md:text-5xl font-black text-white">--</span>
+          <span class="text-white/40 text-xs uppercase tracking-wider">Mins</span>
+        </div>
+        <!-- Seconds -->
+        <div class="bg-kc-bg border border-kc-accent/20 rounded-2xl p-4 sm:p-6 flex flex-col items-center gap-1">
+          <span id="cd-secs" class="text-3xl md:text-5xl font-black text-white">--</span>
+          <span class="text-white/40 text-xs uppercase tracking-wider">Secs</span>
+        </div>
+      </div>
+
+      <!-- Process Steps -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 kc-reveal">
+        <!-- Prepare -->
+        <div class="flex flex-col items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-kc-accent/20 flex items-center justify-center">
+            <i class="ph ph-video-camera text-kc-accent text-xl"></i>
+          </div>
+          <span class="text-white/70 text-sm font-medium">Prepare</span>
+          <span class="text-white/40 text-xs">Film your 3-min video</span>
+        </div>
+        <!-- Pay -->
+        <div class="flex flex-col items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-kc-accent/20 flex items-center justify-center">
+            <i class="ph ph-credit-card text-kc-accent text-xl"></i>
+          </div>
+          <span class="text-white/70 text-sm font-medium">Pay</span>
+          <span class="text-white/40 text-xs">$20 application fee</span>
+        </div>
+        <!-- Submit -->
+        <div class="flex flex-col items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-kc-accent/20 flex items-center justify-center">
+            <i class="ph ph-paper-plane-tilt text-kc-accent text-xl"></i>
+          </div>
+          <span class="text-white/70 text-sm font-medium">Submit</span>
+          <span class="text-white/40 text-xs">Upload your materials</span>
+        </div>
+        <!-- Review -->
+        <div class="flex flex-col items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-kc-accent/20 flex items-center justify-center">
+            <i class="ph ph-check-circle text-kc-accent text-xl"></i>
+          </div>
+          <span class="text-white/70 text-sm font-medium">Review</span>
+          <span class="text-white/40 text-xs">Panel evaluation</span>
+        </div>
+      </div>
+
+      <!-- CTA Button -->
+      <div class="kc-reveal">
+        <button
+          id="checkout-btn"
+          data-magnetic
+          onclick="handleCheckout()"
+          class="inline-flex items-center gap-3 bg-kc-accent hover:bg-kc-accent-glow text-white font-bold text-base sm:text-lg px-10 sm:px-14 py-4 sm:py-5 rounded-full transition-all duration-300 kc-glow kc-glow-hover kc-pulse mb-4"
+        >
+          Apply Now — $20 USD
+          <i class="ph ph-arrow-right text-xl"></i>
+        </button>
+
+        <!-- Security Text -->
+        <div class="flex items-center justify-center gap-2 text-white/30 text-xs">
+          <i class="ph ph-lock text-base"></i>
+          <span>Secure payment powered by Stripe</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- END: APPLY -->
+
+  <!-- ============================================================
+       SECTION 10: FOOTER
+       ============================================================ -->
+  <footer class="bg-kc-bg border-t border-kc-border py-12">
+    <div class="max-w-6xl mx-auto px-6 sm:px-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+
+        <!-- Logo + Partner -->
+        <div class="flex items-center gap-3">
+          <img src="/logo-white.png" alt="Bada BLI" class="h-6 w-auto object-contain" />
+          <span class="text-white/40 text-sm font-light">× Dongyang University</span>
+        </div>
+
+        <!-- Contact Email -->
+        <a
+          href="mailto:global@badaglobal-bli.com"
+          class="text-white/50 hover:text-kc-accent text-sm transition-colors duration-200"
+        >
+          global@badaglobal-bli.com
+        </a>
+
+        <!-- Copyright -->
+        <p class="text-white/30 text-xs">
+          © 2026 Bada BLI x Dongyang University
+        </p>
+
+      </div>
+    </div>
+  </footer>
+  <!-- END: FOOTER -->
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script>
+    // Countdown Timer — Deadline: May 31, 2026
+    (function() {
+        const deadline = new Date('2026-05-31T23:59:59+10:00').getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = deadline - now;
+            if (diff <= 0) {
+                document.getElementById('cd-days').textContent = '0';
+                document.getElementById('cd-hours').textContent = '0';
+                document.getElementById('cd-mins').textContent = '0';
+                document.getElementById('cd-secs').textContent = '0';
+                return;
+            }
+            document.getElementById('cd-days').textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('cd-hours').textContent = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('cd-mins').textContent = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('cd-secs').textContent = Math.floor((diff % (1000 * 60)) / 1000);
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    })();
+
+    // Stripe Checkout (placeholder — Cloudflare Worker will be set up in Task 12)
+    async function handleCheckout() {
+        const btn = document.getElementById('checkout-btn');
+        btn.textContent = 'Processing...';
+        btn.disabled = true;
+        try {
+            const res = await fetch('https://k-culture-checkout.melbada1974.workers.dev', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+            });
+            const data = await res.json();
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                throw new Error('No checkout URL');
+            }
+        } catch (err) {
+            alert('Payment system is temporarily unavailable. Please try again or contact global@badaglobal-bli.com');
+            btn.textContent = 'Apply Now — $20 USD';
+            btn.disabled = false;
+        }
+    }
+
+    // Enhanced GSAP Scroll Reveal
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Default reveal (fade up)
+    document.querySelectorAll('.kc-reveal').forEach(function(el) {
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 0.8,
+        ease: 'power2.out',
+        delay: el.dataset.delay ? parseFloat(el.dataset.delay) : 0,
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+      });
+    });
+
+    // Stagger children in grids
+    document.querySelectorAll('[data-stagger]').forEach(function(grid) {
+      var children = grid.children;
+      gsap.fromTo(children,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out',
+          scrollTrigger: { trigger: grid, start: 'top 80%', once: true }
+        }
+      );
+    });
+
+    // Counter animation for stats
+    document.querySelectorAll('[data-count]').forEach(function(el) {
+      var target = parseInt(el.dataset.count, 10);
+      gsap.from(el, {
+        textContent: 0, duration: 1.5, ease: 'power2.out',
+        snap: { textContent: 1 },
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+      });
+    });
+
+    // Cursor Glow
+    (function(){
+      var glow = document.getElementById('cursorGlow');
+      var mx = 0, my = 0, gx = 0, gy = 0;
+      document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; });
+      function moveGlow() {
+        gx += (mx - gx) * 0.1; gy += (my - gy) * 0.1;
+        glow.style.transform = 'translate(' + (gx - 250) + 'px,' + (gy - 250) + 'px)';
+        requestAnimationFrame(moveGlow);
+      }
+      moveGlow();
+    })();
+
+    // 3D Tilt + Spotlight
+    document.querySelectorAll('[data-tilt]').forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = 'perspective(600px) rotateY(' + (x * 8) + 'deg) rotateX(' + (-y * 8) + 'deg) scale(1.02)';
+        var spot = card.querySelector('.spotlight');
+        if (spot) spot.style.background = 'radial-gradient(circle at ' + (e.clientX - rect.left) + 'px ' + (e.clientY - rect.top) + 'px, rgba(168,85,247,0.06) 0%, transparent 60%)';
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale(1)';
+      });
+    });
+
+    // Magnetic Buttons
+    document.querySelectorAll('[data-magnetic]').forEach(function(btn) {
+      btn.addEventListener('mousemove', function(e) {
+        var rect = btn.getBoundingClientRect();
+        var cx = rect.left + rect.width / 2;
+        var cy = rect.top + rect.height / 2;
+        var dx = (e.clientX - cx) * 0.25;
+        var dy = (e.clientY - cy) * 0.25;
+        btn.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+      });
+      btn.addEventListener('mouseleave', function() {
+        btn.style.transform = 'translate(0,0)';
+      });
+    });
+  </script>
+</body>
+</html>
