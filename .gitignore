@@ -3,6 +3,10 @@
 
 # Local preview screenshots
 kc-*.png
+replicate-*.png
+
+# Source materials (local reference only, not deployed)
+Rick 수정방안 요청/
 
 # OS
 .DS_Store

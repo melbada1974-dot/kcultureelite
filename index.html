@@ -369,40 +369,349 @@
   <!-- END: DIRECTOR'S MESSAGE -->
 
     <!-- ELITE FACULTY -->
-    <section id="faculty" class="py-20 md:py-32 bg-kc-card">
-        <div class="container mx-auto px-6 md:px-12">
-            <div class="text-center mb-12 md:mb-16 kc-reveal">
+    <section id="faculty" class="py-20 md:py-32 bg-kc-card relative overflow-hidden">
+        <div class="container mx-auto px-6 md:px-12 max-w-6xl">
+
+            <!-- Header -->
+            <div class="text-center mb-14 md:mb-20 kc-reveal">
                 <p class="text-kc-accent text-sm tracking-[0.3em] uppercase mb-3">World-Class Mentors</p>
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">Elite Faculty</h2>
-                <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">Learn from the architects of K-Pop, including legendary choreographers and producers who have shaped global icons.</p>
+                <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                    Learn from the architects of K-Pop and K-Culture — legendary directors, producers, and trainers who have shaped global icons and Billboard chart entries.
+                </p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto kc-reveal" data-stagger>
-                <div class="bg-kc-bg border border-kc-border rounded-2xl p-8 text-center kc-card-hover" data-tilt>
-                    <div class="spotlight"></div>
-                    <div class="w-16 h-16 rounded-full bg-kc-accent/10 flex items-center justify-center mx-auto mb-4">
-                        <i class="ph ph-microphone-stage text-2xl text-kc-accent"></i>
+
+            <!-- ============================= -->
+            <!-- TIER 1: LEAD FACULTY (Accordion) -->
+            <!-- ============================= -->
+            <div class="mb-20 md:mb-28 kc-reveal">
+                <p class="text-xs md:text-sm tracking-[0.25em] uppercase text-white/40 mb-8 text-center">
+                    Lead Faculty · Hover / Tap to expand
+                </p>
+                <div class="kc-fa" id="kcFaAccordion">
+                    <div class="kc-fa-panel active" data-face="/assets/faculty/kim-tae-sung.png?v=5">
+                        <div class="kc-fa-bg"></div>
+                        <div class="kc-fa-overlay"></div>
+                        <div class="kc-fa-title">Kim Tae Sung</div>
+                        <div class="kc-fa-content">
+                            <div class="kc-fa-role">Special Trainer · Broadcast Executive</div>
+                            <div class="kc-fa-name">Kim Tae Sung</div>
+                            <p class="kc-fa-career">1998 Baeksang Arts Award winner. Former Executive VP / Production Director at TV Chosun, Head of SBS Radio Center, Head of SBS Production Division, and Brand Communications Lead at SBS Media Holdings.</p>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Choreographers</h3>
-                    <p class="text-white/50 text-sm">Industry-leading choreographers who have created iconic routines for top K-Pop groups.</p>
-                </div>
-                <div class="bg-kc-bg border border-kc-border rounded-2xl p-8 text-center kc-card-hover" data-tilt>
-                    <div class="spotlight"></div>
-                    <div class="w-16 h-16 rounded-full bg-kc-accent/10 flex items-center justify-center mx-auto mb-4">
-                        <i class="ph ph-headphones text-2xl text-kc-accent"></i>
+                    <div class="kc-fa-panel" data-face="/assets/faculty/seo-hye-jung.png?v=5">
+                        <div class="kc-fa-bg"></div>
+                        <div class="kc-fa-overlay"></div>
+                        <div class="kc-fa-title">Seo Hye Jung</div>
+                        <div class="kc-fa-content">
+                            <div class="kc-fa-role">Special Trainer · Voice Actor</div>
+                            <div class="kc-fa-name">Seo Hye Jung</div>
+                            <p class="kc-fa-career">KBS 17th Voice Actor (1982). 2010 Cable TV Broadcasting Awards — Star of the Year (Rollercoaster). Official Korean dubbing artist for Uma Thurman and Juliette Lewis.</p>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Producers</h3>
-                    <p class="text-white/50 text-sm">Hit-making producers and composers behind chart-topping K-Pop tracks and albums.</p>
-                </div>
-                <div class="bg-kc-bg border border-kc-border rounded-2xl p-8 text-center kc-card-hover sm:col-span-2 lg:col-span-1" data-tilt>
-                    <div class="spotlight"></div>
-                    <div class="w-16 h-16 rounded-full bg-kc-accent/10 flex items-center justify-center mx-auto mb-4">
-                        <i class="ph ph-chalkboard-teacher text-2xl text-kc-accent"></i>
+                    <div class="kc-fa-panel" data-face="/assets/faculty/lee-jusun.png?v=5">
+                        <div class="kc-fa-bg"></div>
+                        <div class="kc-fa-overlay"></div>
+                        <div class="kc-fa-title">Lee Jusun</div>
+                        <div class="kc-fa-content">
+                            <div class="kc-fa-role">Dance Director</div>
+                            <div class="kc-fa-name">Lee Jusun</div>
+                            <p class="kc-fa-career">Chief Choreographer for PSY (Gangnam Style, Gentleman, Napal Baji) and G.O.D (full discography). Board Director of Korea Choreographers Association. Former Director of Z-Boys / Z-Girls. 200+ artist choreography credits.</p>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Industry Veterans</h3>
-                    <p class="text-white/50 text-sm">Seasoned professionals from major agencies with decades of artist development experience.</p>
+                    <div class="kc-fa-panel" data-face="/assets/faculty/hwang-jae-woong.png?v=5">
+                        <div class="kc-fa-bg"></div>
+                        <div class="kc-fa-overlay"></div>
+                        <div class="kc-fa-title">Hwang Jae Woong</div>
+                        <div class="kc-fa-content">
+                            <div class="kc-fa-role">Vocal Director</div>
+                            <div class="kc-fa-name">Hwang Jae Woong</div>
+                            <p class="kc-fa-career">Master's Degree (Summa Cum Laude), Postmodern Music, Kyung Hee University. Recording Director for Girls' Generation, B1A4, Astro, Weki Meki, LYn, Tei, U-KISS. Billboard World Albums Chart #6.</p>
+                        </div>
+                    </div>
+                    <div class="kc-fa-panel" data-face="/assets/faculty/jenny-shin.png?v=5">
+                        <div class="kc-fa-bg"></div>
+                        <div class="kc-fa-overlay"></div>
+                        <div class="kc-fa-title">Jenny Shin</div>
+                        <div class="kc-fa-content">
+                            <div class="kc-fa-role">Acting Director · Head of Education</div>
+                            <div class="kc-fa-name">Jenny Shin</div>
+                            <p class="kc-fa-career">CEO of JS Acting Academy. CEO of Flight Entertainment. Rookie actor trainer for YG Entertainment and FNC Entertainment. 2020 Korea Arts & Culture Grand Prize — Education.</p>
+                        </div>
+                    </div>
+                    <div class="kc-fa-panel" data-face="/assets/faculty/lee-taehoo.png?v=5">
+                        <div class="kc-fa-bg"></div>
+                        <div class="kc-fa-overlay"></div>
+                        <div class="kc-fa-title">Lee Taehoo</div>
+                        <div class="kc-fa-content">
+                            <div class="kc-fa-role">Dance Leader</div>
+                            <div class="kc-fa-name">Lee Taehoo</div>
+                            <p class="kc-fa-career">Founding Member & Chief Performance Director at Pnation Entertainment. Choreography direction for BLACKPINK global campaigns, Cravity (Starship), PSY (Napal Baji, Daddy), and G.O.D concert tours.</p>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- ============================= -->
+            <!-- TIER 2: SPECIALIST TRAINERS (Flip Cards) -->
+            <!-- ============================= -->
+            <div class="kc-reveal">
+                <p class="text-xs md:text-sm tracking-[0.25em] uppercase text-white/40 mb-8 text-center">
+                    Specialist Trainers · Hover / Tap card to flip
+                </p>
+                <div class="kc-fc-grid" data-stagger>
+                    <!-- Kim Sang Hyun -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/kim-sang-hyun.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Music Video</span><h4 class="kc-fc-name">Kim Sang Hyun</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Kim Sang Hyun</h4><p class="kc-fc-career">Choreography for Lee Hi 'No One', Suga 'Daechwita', Seungri 'Where Are U From', Giriboy 'acrnm', Trudy 'Very Rare'. MV collaborations with San E, Pniel, and others.</p></div>
+                        </div>
+                    </div>
+                    <!-- Kim Eunsun -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/kim-eunsun.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Performance Dance</span><h4 class="kc-fc-name">Kim Eunsun</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Kim Eunsun</h4><p class="kc-fc-career">Former YGX dancer. Performances with BLACKPINK, WINNER, iKON, Big Bang, AKMU, Lee Hi, Jeon Somi, BABYMONSTER, TREASURE — concerts, MVs, and award shows. Tours with IU and PSY.</p></div>
+                        </div>
+                    </div>
+                    <!-- Jin Hyun Jin (Dance) -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/jin-hyun-jin-dance.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Choreographer</span><h4 class="kc-fc-name">Jin Hyun Jin</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Jin Hyun Jin</h4><p class="kc-fc-career">2022 Thailand Seven Stars 'Dance Master'. Directed the 2PM medley at Jun. K's Thailand fan meeting. Choreography for BTOB 'Nae-ui Baram', BLACKSWAN 'Cat & Mouse' and 'Karma'.</p></div>
+                        </div>
+                    </div>
+                    <!-- Yoon Jaea -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/yoon-jaea.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Performance</span><h4 class="kc-fc-name">Yoon Jaea</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Yoon Jaea</h4><p class="kc-fc-career">BTS Jimin 'Set Me Free' and 'Like Crazy' broadcast promotions. Jeon Somi's Taiwan and Philippines K-Pop Festivals. Guest performance at BTS Suga's solo concert. MV work with ONEUS and U-KISS.</p></div>
+                        </div>
+                    </div>
+                    <!-- Jung Minyoung -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/jung-minyoung.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Vocal & Arranging</span><h4 class="kc-fc-name">Jung Minyoung</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Jung Minyoung</h4><p class="kc-fc-career">PhD candidate, Applied Music, Sejong University Graduate School. Visiting Professor at Baekseok Arts Univ., Sungshin Women's Univ., Yeoju Univ., Sejong Univ., Korea National Univ. of Arts. Arrangement & vocal coaching for YG Treasure Box and SBS K-Pop Star.</p></div>
+                        </div>
+                    </div>
+                    <!-- Lee Ju Hyun -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/lee-ju-hyun.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Vocal Coaching</span><h4 class="kc-fc-name">Lee Ju Hyun</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Lee Ju Hyun</h4><p class="kc-fc-career">Vocal Director for TV Chosun Miss Trot 3 / Mister Trot 2, JTBC Sing Again / Phantom Singer 2 / Peak Time, and MBN Voice King. Vocal coach at SLS Korea. Trainer for musicals 'Mozart' and 'Again, Spring'.</p></div>
+                        </div>
+                    </div>
+                    <!-- Jo Hyun Heum -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/jo-hyun-heum.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Vocal</span><h4 class="kc-fc-name">Jo Hyun Heum</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Jo Hyun Heum</h4><p class="kc-fc-career">Vocal trainer at Vocal King Studio. Leader of ballad group Four Seasons. Two-year performance run in Shin-Okubo, Tokyo. Judge & special guest at the 2017 K-POP Contest in Akita, Japan.</p></div>
+                        </div>
+                    </div>
+                    <!-- Lee Da Eun -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/lee-da-eun.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Vocal</span><h4 class="kc-fc-name">Lee Da Eun</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Lee Da Eun</h4><p class="kc-fc-career">B.A. Applied Music (Vocal), Yeoju University. Chorus recordings for KBS 'Immortal Songs' (Jang Min-ho, Lee Chan-won, Hwasa). Owner of OGO Music Academy. Silver Prize, National High School Performing Arts Competition.</p></div>
+                        </div>
+                    </div>
+                    <!-- Jin Hyun Jin (Vocal) -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/jin-hyun-jin-vocal.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Reggae & Vocal</span><h4 class="kc-fc-name">Jin Hyun Jin</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Jin Hyun Jin</h4><p class="kc-fc-career">Musicians Institute (MI) — Independent Artist Program. CEO of Rude Boys Sound, Korea's largest reggae label. Waterbomb nationwide tour performances (Seoul, Incheon, Sokcho, Daejeon).</p></div>
+                        </div>
+                    </div>
+                    <!-- Ju Jae Hoon -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/ju-jae-hoon.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Vocal & Musical</span><h4 class="kc-fc-name">Ju Jae Hoon</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Ju Jae Hoon</h4><p class="kc-fc-career">Vocal trainer at Vocal King Studio. English online lessons for students in Indonesia, Turkey, Nigeria, Morocco. Musical performances: 'Youth Parade', 'I Love You, You're Perfect, Now Change'.</p></div>
+                        </div>
+                    </div>
+                    <!-- Jo Sang Gi -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/jo-sang-gi.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Drama Acting</span><h4 class="kc-fc-name">Jo Sang Gi</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Jo Sang Gi</h4><p class="kc-fc-career">Appeared in MBC 'Motel California' (2025), KBS2 'The Goryeo-Khitan War', 'Family by Choice', 'The Prosecutor Reviews' (2024), SBS 'The Chaebol X Detective', TVN 'Not Trying to Lose' and 'Divorce Insurance'.</p></div>
+                        </div>
+                    </div>
+                    <!-- Kang Se Jung -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/kang-se-jung.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Drama Acting</span><h4 class="kc-fc-name">Kang Se Jung</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Kang Se Jung</h4><p class="kc-fc-career">Drama credits: KBS2 'Young Lady and Gentleman', KBS1 'Jeong Do-jeon', Hunan TV 'God of War Zhao Zilong', JTBC 'Heartless City', SBS 'Marriage Goddess', MBC 'Jewel Bibimbap' and 'Angel's Choice'.</p></div>
+                        </div>
+                    </div>
+                    <!-- Kim Nak Kyun -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/kim-nak-kyun.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Drama Acting</span><h4 class="kc-fc-name">Kim Nak Kyun</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Kim Nak Kyun</h4><p class="kc-fc-career">2025 'Cinderella Game' and 'Undercover High School'. 2024 TVING 'Study Group', KBS2 'Beauty and Mr. Romantic', 'Family by Choice', 'The Prosecutor Reviews', SBS 'The Chaebol X Detective'.</p></div>
+                        </div>
+                    </div>
+                    <!-- Kim Si On -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front" style="background-image: url('/assets/faculty/kim-si-on.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · Film Acting</span><h4 class="kc-fc-name">Kim Si On</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Kim Si On</h4><p class="kc-fc-career">Assistant Director of 'In Heaven' — awarded at 2022 Asian Independent Film Festival / LA Asian Film Awards. Appeared in KBS2 'Sister Bok-hee', films 'Fighting Spirit', 'My Love Is Far Away', 'Two Guys'.</p></div>
+                        </div>
+                    </div>
+                    <!-- Ahn Chaeri -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front kc-fc-front-wide" style="background-image: url('/assets/faculty/ahn-chaeri.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · K-Pop Dance</span><h4 class="kc-fc-name">Ahn Chaeri</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">Ahn Chaeri</h4><p class="kc-fc-career">B.A. Applied Dance, Hanyang University. Choreographer for BTS MMA BLACKSWAN performance. DEAR ARTIST choreographer. Performances at PAS SHOW 12/14/15, K-ART FESTA, SIDI CARNIVAL.</p></div>
+                        </div>
+                    </div>
+                    <!-- YJ Lee -->
+                    <div class="kc-fc" tabindex="0">
+                        <div class="kc-fc-inner">
+                            <div class="kc-fc-front kc-fc-front-wide" style="background-image: url('/assets/faculty/yj-lee.png?v=5');">
+                                <div class="kc-fc-front-grad"></div>
+                                <div class="kc-fc-front-label"><span class="kc-fc-role">Trainer · K-Street Dance</span><h4 class="kc-fc-name">YJ Lee</h4></div>
+                            </div>
+                            <div class="kc-fc-back"><h4 class="kc-fc-name-back">YJ Lee</h4><p class="kc-fc-career">M.A., Hanyang University Graduate School. B.A. Applied Dance, Hanyang University. Director of Orent Dance Studio. G-Dance specialist trainer. Lecturer at Performing Arts High School and AI dance consultant.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================= -->
+            <!-- CHATBOT CTA (Faculty section footer) -->
+            <!-- ============================= -->
+            <div class="mt-16 md:mt-24 text-center kc-reveal">
+                <p class="text-white/55 text-sm md:text-base mb-5 max-w-xl mx-auto leading-relaxed">
+                    Want to know more about our faculty, their teaching style, curriculum, or Dongyang University? Ask our AI assistant for detailed answers — anytime.
+                </p>
+                <button type="button" class="kc-chat-trigger inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-kc-accent/10 hover:bg-kc-accent/20 border border-kc-accent/40 text-kc-accent-glow font-semibold transition-all hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]">
+                    <i class="ph ph-chat-circle-dots text-xl"></i>
+                    <span>Ask our AI Assistant</span>
+                </button>
+                <p class="mt-4 text-white/30 text-xs">AI responses may contain errors — for official inquiries email <a class="underline decoration-dotted hover:text-white/60" href="mailto:global@badaglobal-bli.com">global@badaglobal-bli.com</a></p>
             </div>
         </div>
+
+        <!-- Scoped styles: Faculty Tier 1 Accordion + Tier 2 Flip Cards -->
+        <style>
+            /* ── Tier 1: Accordion ── */
+            .kc-fa { display: flex; gap: 8px; height: 68vh; min-height: 440px; max-height: 600px; }
+            .kc-fa-panel { flex: 1; position: relative; overflow: hidden; border-radius: 16px; cursor: pointer; transition: flex 0.6s cubic-bezier(0.16,1,0.3,1); background: #0a0a0a; }
+            .kc-fa-panel:hover, .kc-fa-panel.active { flex: 5; }
+            .kc-fa-bg { position: absolute; inset: 0; background-size: cover; background-position: center top; filter: grayscale(100%) brightness(0.78); transition: filter 0.6s, transform 0.6s; }
+            .kc-fa-panel:hover .kc-fa-bg, .kc-fa-panel.active .kc-fa-bg { filter: grayscale(0%) brightness(1); transform: scale(1.05); }
+            .kc-fa-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 45%, transparent 72%); }
+            .kc-fa-title { position: absolute; bottom: 28px; left: 18px; writing-mode: vertical-rl; text-orientation: mixed; font-size: 12px; letter-spacing: 0.12em; font-weight: 600; color: rgba(255,255,255,0.85); text-transform: uppercase; transition: opacity 0.3s; z-index: 3; }
+            .kc-fa-panel:hover .kc-fa-title, .kc-fa-panel.active .kc-fa-title { opacity: 0; }
+            .kc-fa-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 28px 30px; z-index: 2; opacity: 0; transform: translateY(10px); transition: all 0.45s cubic-bezier(0.16,1,0.3,1) 0.15s; }
+            .kc-fa-panel:hover .kc-fa-content, .kc-fa-panel.active .kc-fa-content { opacity: 1; transform: translateY(0); }
+            .kc-fa-role { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #C084FC; font-weight: 600; margin-bottom: 8px; }
+            .kc-fa-name { font-size: clamp(22px, 2.6vw, 30px); font-weight: 700; color: white; letter-spacing: -0.015em; margin-bottom: 10px; }
+            .kc-fa-career { font-size: 13.5px; color: rgba(255,255,255,0.72); line-height: 1.6; max-width: 440px; }
+            @media (max-width: 768px) {
+                .kc-fa { flex-direction: column; height: auto; min-height: 0; max-height: none; gap: 6px; }
+                .kc-fa-panel { height: 68px; flex: none !important; transition: height 0.55s cubic-bezier(0.16,1,0.3,1); }
+                .kc-fa-panel:hover, .kc-fa-panel.active { height: 360px; flex: none !important; }
+                .kc-fa-title { writing-mode: horizontal-tb; bottom: 22px; left: 20px; font-size: 13px; }
+                .kc-fa-content { padding: 20px 22px 24px; }
+                .kc-fa-career { font-size: 13px; max-width: 100%; }
+            }
+
+            /* ── Tier 2: Flip Cards ── */
+            .kc-fc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+            @media (min-width: 640px) { .kc-fc-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+            @media (min-width: 1024px) { .kc-fc-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+            .kc-fc { perspective: 1200px; aspect-ratio: 3 / 4; cursor: pointer; }
+            .kc-fc-inner { position: relative; width: 100%; height: 100%; transition: transform 0.65s cubic-bezier(0.16,1,0.3,1); transform-style: preserve-3d; }
+            .kc-fc:hover .kc-fc-inner, .kc-fc.flipped .kc-fc-inner, .kc-fc:focus-visible .kc-fc-inner { transform: rotateY(180deg); }
+            .kc-fc-front, .kc-fc-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 18px; overflow: hidden; }
+            .kc-fc-front { background-size: cover; background-position: center top; background-color: #0a0a0a; filter: grayscale(100%) brightness(0.82); transition: filter 0.55s; display: flex; flex-direction: column; justify-content: flex-end; }
+            .kc-fc-front-wide { background-size: cover; background-position: center center; }
+            .kc-fc:hover .kc-fc-front, .kc-fc.flipped .kc-fc-front { filter: grayscale(0%) brightness(1); }
+            .kc-fc-front-grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.35) 45%, transparent 75%); }
+            .kc-fc-front-label { position: relative; padding: 18px; z-index: 2; }
+            .kc-fc-role { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #C084FC; font-weight: 600; display: block; margin-bottom: 6px; }
+            .kc-fc-name { font-size: 18px; font-weight: 700; color: white; letter-spacing: -0.01em; line-height: 1.2; }
+            .kc-fc-back { background: linear-gradient(145deg, #1a0e2b 0%, #0a0a0a 65%); transform: rotateY(180deg); padding: 22px; display: flex; flex-direction: column; justify-content: center; }
+            .kc-fc-name-back { font-size: 17px; font-weight: 700; color: #C084FC; margin-bottom: 10px; letter-spacing: -0.01em; }
+            .kc-fc-career { font-size: 12px; line-height: 1.6; color: rgba(255,255,255,0.78); overflow-y: auto; max-height: 100%; padding-right: 4px; }
+            .kc-fc-career::-webkit-scrollbar { width: 3px; }
+            .kc-fc-career::-webkit-scrollbar-thumb { background: rgba(168,85,247,0.4); border-radius: 3px; }
+        </style>
+
+        <script>
+            (function(){
+                // Accordion click (mobile) + hover fallback via CSS
+                var fa = document.getElementById('kcFaAccordion');
+                if (fa) {
+                    fa.querySelectorAll('.kc-fa-panel').forEach(function(p){
+                        // Set background from data-face
+                        var face = p.getAttribute('data-face');
+                        if (face) p.querySelector('.kc-fa-bg').style.backgroundImage = 'url("' + face + '")';
+                        p.addEventListener('click', function(){
+                            fa.querySelectorAll('.kc-fa-panel').forEach(function(s){ s.classList.remove('active'); });
+                            p.classList.add('active');
+                        });
+                    });
+                }
+                // Flip card tap
+                document.querySelectorAll('.kc-fc').forEach(function(c){
+                    c.addEventListener('click', function(){ c.classList.toggle('flipped'); });
+                });
+                // Chatbot CTA placeholder (until real chatbot built)
+                document.querySelectorAll('.kc-chat-trigger').forEach(function(b){
+                    b.addEventListener('click', function(){
+                        alert('AI Assistant is coming soon!\n\nFor urgent inquiries, please email: global@badaglobal-bli.com');
+                    });
+                });
+            })();
+        </script>
     </section>
   <!-- END: ELITE FACULTY -->
 
