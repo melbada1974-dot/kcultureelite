@@ -130,6 +130,9 @@
     }
     .kc-pulse { animation: pulse-glow 2s ease-in-out infinite; }
   </style>
+
+  <!-- K-Culture Assistant Chatbot Widget -->
+  <link rel="stylesheet" href="/assets/chatbot/chatbot.css" />
 </head>
 
 <body class="bg-kc-bg text-white font-sans antialiased">
@@ -1323,5 +1326,12 @@
       });
     });
   </script>
+
+  <!-- K-Culture Assistant Chatbot Widget -->
+  <script
+    src="/assets/chatbot/chatbot.js"
+    data-worker="https://kc-chatbot.melbada1974.workers.dev"
+    defer
+  ></script>
 </body>
 </html>
