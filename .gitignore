@@ -1,6 +1,9 @@
 # Playwright MCP artifacts
 .playwright-mcp/
 
+# Superpowers brainstorming artifacts
+.superpowers/
+
 # Local preview screenshots
 kc-*.png
 replicate-*.png
