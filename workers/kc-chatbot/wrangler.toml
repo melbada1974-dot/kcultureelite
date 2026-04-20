@@ -1,0 +1,21 @@
+name = "kc-chatbot"
+main = "src/index.ts"
+compatibility_date = "2026-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "kc-db"
+database_id = "ce9dd78b-4651-4537-ac76-8d10b129c3db"
+migrations_dir = "migrations"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "e1e2db3b22fb4de496bee403fff9fc5e"
+
+[vars]
+ENV = "production"
+MONTHLY_BUDGET_USD = "30"
+MAX_MESSAGES_PER_HOUR = "20"
+MAX_MESSAGES_PER_DAY = "60"
+MAX_OUTPUT_TOKENS = "1000"
