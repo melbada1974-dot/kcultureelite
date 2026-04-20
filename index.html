@@ -626,19 +626,6 @@
                 </div>
             </div>
 
-            <!-- ============================= -->
-            <!-- CHATBOT CTA (Faculty section footer) -->
-            <!-- ============================= -->
-            <div class="mt-16 md:mt-24 text-center kc-reveal">
-                <p class="text-white/55 text-sm md:text-base mb-5 max-w-xl mx-auto leading-relaxed">
-                    Want to know more about our faculty, their teaching style, curriculum, or Dongyang University? Ask our AI assistant for detailed answers — anytime.
-                </p>
-                <button type="button" class="kc-chat-trigger inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-kc-accent/10 hover:bg-kc-accent/20 border border-kc-accent/40 text-kc-accent-glow font-semibold transition-all hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]">
-                    <i class="ph ph-chat-circle-dots text-xl"></i>
-                    <span>Ask our AI Assistant</span>
-                </button>
-                <p class="mt-4 text-white/30 text-xs">AI responses may contain errors — for official inquiries email <a class="underline decoration-dotted hover:text-white/60" href="mailto:global@badaglobal-bli.com">global@badaglobal-bli.com</a></p>
-            </div>
         </div>
 
         <!-- Scoped styles: Faculty Tier 1 Accordion + Tier 2 Flip Cards -->
@@ -706,12 +693,6 @@
                 // Flip card tap
                 document.querySelectorAll('.kc-fc').forEach(function(c){
                     c.addEventListener('click', function(){ c.classList.toggle('flipped'); });
-                });
-                // Chatbot CTA placeholder (until real chatbot built)
-                document.querySelectorAll('.kc-chat-trigger').forEach(function(b){
-                    b.addEventListener('click', function(){
-                        alert('AI Assistant is coming soon!\n\nFor urgent inquiries, please email: global@badaglobal-bli.com');
-                    });
                 });
             })();
         </script>
