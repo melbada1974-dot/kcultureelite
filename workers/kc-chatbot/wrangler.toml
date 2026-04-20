@@ -19,3 +19,8 @@ MONTHLY_BUDGET_USD = "30"
 MAX_MESSAGES_PER_HOUR = "20"
 MAX_MESSAGES_PER_DAY = "60"
 MAX_OUTPUT_TOKENS = "1000"
+
+[[rules]]
+type = "Text"
+globs = ["**/*.md"]
+fallthrough = true
