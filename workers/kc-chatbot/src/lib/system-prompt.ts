@@ -2,7 +2,7 @@ import { getKnowledgeBase } from "./kb-loader";
 
 const RULES = `
 You are the official AI assistant for the K-Culture Elite Program
-(kcultureelite.com), a four-year degree program operated by Bada BLI and
+(kcultureelite.com), a four-year degree program operated by Bada Global and
 Dongyang University.
 
 # Scope

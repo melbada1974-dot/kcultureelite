@@ -13,6 +13,7 @@ pr-step*.png
 
 # Raw uploaded brand assets (copy into /assets/ before use, do not deploy)
 Bada logo*.png
+assets/B2B Korean University*.png
 
 # Source materials (local reference only, not deployed)
 Rick 수정방안 요청/
