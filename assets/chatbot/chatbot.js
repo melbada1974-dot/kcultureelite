@@ -80,7 +80,7 @@
   const footer = el(
     "div",
     "kc-chat-footer",
-    "Powered by Claude · Your chat stays in your browser",
+    "Powered by Claude · Questions may be logged anonymously to improve our assistant",
   );
 
   panel.append(header, messagesEl, form, footer);
@@ -151,27 +151,9 @@
       }
       state.messages.push({ role: "assistant", content: data.reply });
       saveHistory();
-
-      // Progressive Lead Capture: detect user email in latest message
-      const lastUser = state.messages[state.messages.length - 2];
-      const emailMatch = lastUser.content.match(
-        /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/,
-      );
-      if (emailMatch) {
-        const nameMatch = lastUser.content.match(
-          /\bI['']?m\s+([A-Z][A-Za-z'-]{1,30})/,
-        );
-        fetch(`${WORKER}/lead`, {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            email: emailMatch[1],
-            name: nameMatch?.[1] ?? "(unknown)",
-            consent_type: "admissions_contact",
-            language_pref: navigator.language?.slice(0, 2) ?? "en",
-          }),
-        }).catch((err) => console.warn("[chatbot] lead capture failed", err));
-      }
+      // Note: Lead capture (/lead) is intentionally NOT called automatically here.
+      // Formal lead registration happens through the Apply Now form (Phase 3),
+      // which presents an explicit PIPA/GDPR consent checkbox.
     } catch (err) {
       console.error(err);
       state.messages.push({

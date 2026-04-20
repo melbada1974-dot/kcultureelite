@@ -1,5 +1,5 @@
 import type { Env, ChatRequest, ChatResponse } from "../types";
-import { hashIP, scrubPII } from "../lib/privacy";
+import { hashIP, scrubPII, normalizeIP } from "../lib/privacy";
 import { checkRateLimit } from "../lib/rate-limit";
 import { checkBudget, addCost, estimateCost } from "../lib/cost-tracker";
 import { callClaude } from "../lib/anthropic";
@@ -9,14 +9,15 @@ const LIMIT_MSG =
   "I've answered quite a few questions already today. For detailed inquiries, please email global@badaglobal-bli.com — our team will get back to you personally.";
 const BUDGET_MSG =
   "Our assistant is resting for the month. Please email global@badaglobal-bli.com for any questions — we'll get right back to you.";
+const UPSTREAM_ERR_MSG =
+  "Our assistant is temporarily unavailable. Please try again in a moment, or email global@badaglobal-bli.com for immediate help.";
+const MAX_MESSAGES_PER_REQUEST = 40;
 
 function json(body: unknown, status = 200): Response {
+  // CORS headers는 index.ts 라우터에서 origin allowlist 기반으로 덮어씀
   return new Response(JSON.stringify(body), {
     status,
-    headers: {
-      "content-type": "application/json",
-      "access-control-allow-origin": "*",
-    },
+    headers: { "content-type": "application/json" },
   });
 }
 
@@ -34,12 +35,19 @@ export async function handleChat(req: Request, env: Env): Promise<Response> {
   if (!Array.isArray(payload.messages) || payload.messages.length === 0) {
     return json({ error: "messages required" }, 400);
   }
+  if (payload.messages.length > MAX_MESSAGES_PER_REQUEST) {
+    return json({ error: `max ${MAX_MESSAGES_PER_REQUEST} messages per request` }, 400);
+  }
   const latest = payload.messages[payload.messages.length - 1];
   if (!latest.content || latest.content.length > 2000) {
     return json({ error: "message length must be 1..2000" }, 400);
   }
+  // 마지막 메시지는 반드시 user 역할 (클라이언트가 fake assistant turn 주입하는 것 방지)
+  if (latest.role !== "user") {
+    return json({ error: "last message must be user role" }, 400);
+  }
 
-  const ip = req.headers.get("cf-connecting-ip") ?? "0.0.0.0";
+  const ip = normalizeIP(req.headers.get("cf-connecting-ip") ?? "0.0.0.0");
   const ipHash = await hashIP(ip, env.IP_HASH_SALT);
 
   const rl = await checkRateLimit(ipHash, env);
@@ -52,18 +60,22 @@ export async function handleChat(req: Request, env: Env): Promise<Response> {
     return json(reply, 200);
   }
 
-  // 대화 메시지 내 사용자 PII 스크러빙 (개인정보 저장 방지)
-  const safeMessages = payload.messages.map((m) => ({
-    role: m.role,
-    content: scrubPII(m.content),
-  }));
-
-  const claude = await callClaude({
-    apiKey: env.ANTHROPIC_API_KEY,
-    systemPrompt: buildSystemPrompt(),
-    messages: safeMessages,
-    maxTokens: parseInt(env.MAX_OUTPUT_TOKENS, 10),
-  });
+  // Claude 호출 시에는 PII 스크러빙하지 않음 — 사용자가 자기 이메일을 공유한
+  // 맥락을 Claude가 이해하고 자연스럽게 응답할 수 있어야 하기 때문.
+  // PII 스크러빙은 questions_log D1 저장 시점에만 적용 (아래 INSERT 참고).
+  let claude;
+  try {
+    claude = await callClaude({
+      apiKey: env.ANTHROPIC_API_KEY,
+      systemPrompt: buildSystemPrompt(),
+      messages: payload.messages,
+      maxTokens: parseInt(env.MAX_OUTPUT_TOKENS, 10),
+    });
+  } catch (e) {
+    console.error("claude upstream failed", e);
+    const reply: ChatResponse = { reply: UPSTREAM_ERR_MSG, language: "en" };
+    return json(reply, 200);
+  }
 
   // 비용 기록 (best-effort, 실패해도 응답은 간다)
   try {
