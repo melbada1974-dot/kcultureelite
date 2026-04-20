@@ -130,6 +130,9 @@
     }
     .kc-pulse { animation: pulse-glow 2s ease-in-out infinite; }
   </style>
+
+  <!-- K-Culture Assistant Chatbot Widget -->
+  <link rel="stylesheet" href="/assets/chatbot/chatbot.css" />
 </head>
 
 <body class="bg-kc-bg text-white font-sans antialiased">
@@ -162,7 +165,7 @@
           <img src="/assets/logo-white.png" alt="Bada BLI Logo" class="h-[66px] md:h-[88px] w-auto">
         </a>
         <div class="flex items-center">
-          <img src="/assets/dongyang-logo.jpg" alt="Dongyang University Logo" class="h-[44px] md:h-[56px] w-auto object-contain rounded-xl shadow-md shadow-black/30 ring-1 ring-white/10">
+          <img src="/assets/dongyang-logo-white.png" alt="Dongyang University Logo" class="h-[44px] md:h-[56px] w-auto object-contain">
         </div>
       </div>
     </header>
@@ -215,7 +218,7 @@
       <div class="text-center mb-14 kc-reveal">
         <p class="text-kc-accent text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-3">Trusted By The Best</p>
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white">Industry Partners</h2>
-        <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mt-4">We maintain deep, active partnerships with the most powerful names in the Korean and global entertainment industry. These are not nominal affiliations — they translate into real-world access, field training, and placement opportunities.</p>
+        <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mt-4">We maintain deep, active partnerships with <span class="text-white font-semibold">20+ of the most powerful names</span> in the Korean and global entertainment industry. These are not nominal affiliations — they translate into real-world access, field training, and placement opportunities.</p>
       </div>
 
       <!-- Logo Grid: 8 labels -->
@@ -325,7 +328,7 @@
         </div>
         <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center gap-2 kc-card-hover">
           <div class="spotlight"></div>
-          <span class="kc-text-gradient text-4xl sm:text-5xl font-black">8+</span>
+          <span class="kc-text-gradient text-4xl sm:text-5xl font-black">20+</span>
           <span class="text-white/60 text-sm sm:text-base font-medium">Partners</span>
         </div>
       </div>
@@ -623,19 +626,6 @@
                 </div>
             </div>
 
-            <!-- ============================= -->
-            <!-- CHATBOT CTA (Faculty section footer) -->
-            <!-- ============================= -->
-            <div class="mt-16 md:mt-24 text-center kc-reveal">
-                <p class="text-white/55 text-sm md:text-base mb-5 max-w-xl mx-auto leading-relaxed">
-                    Want to know more about our faculty, their teaching style, curriculum, or Dongyang University? Ask our AI assistant for detailed answers — anytime.
-                </p>
-                <button type="button" class="kc-chat-trigger inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-kc-accent/10 hover:bg-kc-accent/20 border border-kc-accent/40 text-kc-accent-glow font-semibold transition-all hover:shadow-[0_0_30px_rgba(168,85,247,0.3)]">
-                    <i class="ph ph-chat-circle-dots text-xl"></i>
-                    <span>Ask our AI Assistant</span>
-                </button>
-                <p class="mt-4 text-white/30 text-xs">AI responses may contain errors — for official inquiries email <a class="underline decoration-dotted hover:text-white/60" href="mailto:global@badaglobal-bli.com">global@badaglobal-bli.com</a></p>
-            </div>
         </div>
 
         <!-- Scoped styles: Faculty Tier 1 Accordion + Tier 2 Flip Cards -->
@@ -704,12 +694,6 @@
                 document.querySelectorAll('.kc-fc').forEach(function(c){
                     c.addEventListener('click', function(){ c.classList.toggle('flipped'); });
                 });
-                // Chatbot CTA placeholder (until real chatbot built)
-                document.querySelectorAll('.kc-chat-trigger').forEach(function(b){
-                    b.addEventListener('click', function(){
-                        alert('AI Assistant is coming soon!\n\nFor urgent inquiries, please email: global@badaglobal-bli.com');
-                    });
-                });
             })();
         </script>
     </section>
@@ -736,6 +720,13 @@
           <i class="ph ph-music-notes text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-lg">K-Pop Business</h3>
           <p class="text-white/50 text-sm leading-relaxed">Artist management, fandom business, global production strategy</p>
+          <div class="mt-auto pt-4 border-t border-white/10 flex items-start gap-2">
+            <i class="ph ph-map-pin text-kc-accent/70 text-base mt-0.5"></i>
+            <div>
+              <p class="text-white/70 text-xs font-semibold">K-Pop Lab</p>
+              <p class="text-white/40 text-[11px] leading-snug">Vocal · Dance · Album Production Suite</p>
+            </div>
+          </div>
         </div>
 
         <!-- Track 2: K-Performance -->
@@ -744,6 +735,13 @@
           <i class="ph ph-microphone-stage text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-lg">K-Performance</h3>
           <p class="text-white/50 text-sm leading-relaxed">Concert planning, stage production, performance branding</p>
+          <div class="mt-auto pt-4 border-t border-white/10 flex items-start gap-2">
+            <i class="ph ph-map-pin text-kc-accent/70 text-base mt-0.5"></i>
+            <div>
+              <p class="text-white/70 text-xs font-semibold">Performance Studio</p>
+              <p class="text-white/40 text-[11px] leading-snug">Stage Design · Lighting &amp; Sound · Concert Mockups</p>
+            </div>
+          </div>
         </div>
 
         <!-- Track 3: K-Beauty Business -->
@@ -752,6 +750,13 @@
           <i class="ph ph-sparkle text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-lg">K-Beauty Business</h3>
           <p class="text-white/50 text-sm leading-relaxed">Global beauty marketing, e-commerce, brand launching</p>
+          <div class="mt-auto pt-4 border-t border-white/10 flex items-start gap-2">
+            <i class="ph ph-map-pin text-kc-accent/70 text-base mt-0.5"></i>
+            <div>
+              <p class="text-white/70 text-xs font-semibold">Beauty Lab</p>
+              <p class="text-white/40 text-[11px] leading-snug">Idol Styling · Makeup · Editorial Shoots</p>
+            </div>
+          </div>
         </div>
 
         <!-- Track 4: K-Fusion Media & Content -->
@@ -760,6 +765,13 @@
           <i class="ph ph-video-camera text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-lg">K-Fusion Media &amp; Content</h3>
           <p class="text-white/50 text-sm leading-relaxed">Content planning, SNS marketing, YouTube business</p>
+          <div class="mt-auto pt-4 border-t border-white/10 flex items-start gap-2">
+            <i class="ph ph-map-pin text-kc-accent/70 text-base mt-0.5"></i>
+            <div>
+              <p class="text-white/70 text-xs font-semibold">Media Studio</p>
+              <p class="text-white/40 text-[11px] leading-snug">Video Production · Global Media IP</p>
+            </div>
+          </div>
         </div>
 
         <!-- Track 5: Global Entertainment Startup (centered on tablet) -->
@@ -768,6 +780,13 @@
           <i class="ph ph-rocket-launch text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-lg">Global Entertainment Startup</h3>
           <p class="text-white/50 text-sm leading-relaxed">Business modelling, IP business, platform entrepreneurship</p>
+          <div class="mt-auto pt-4 border-t border-white/10 flex items-start gap-2">
+            <i class="ph ph-map-pin text-kc-accent/70 text-base mt-0.5"></i>
+            <div>
+              <p class="text-white/70 text-xs font-semibold">Live Commerce Studio</p>
+              <p class="text-white/40 text-[11px] leading-snug">Live Streaming · Direct Sales · Platform Ops</p>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -938,19 +957,74 @@
        SECTION 7: SCHOLARSHIP
        ============================================================ -->
   <section id="scholarship" class="bg-kc-card py-20 md:py-32">
-    <div class="max-w-3xl mx-auto px-6 sm:px-10 text-center">
+    <div class="max-w-5xl mx-auto px-6 sm:px-10">
 
       <!-- Title -->
-      <div class="mb-12 kc-reveal">
+      <div class="text-center mb-14 kc-reveal">
         <p class="text-kc-accent text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-3">Financial Support</p>
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white">Invest in Your Future</h2>
+        <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mt-4">
+          Your K-STAR Global Audition performance directly unlocks scholarship support — from <span class="text-white font-semibold">30% to 100%</span> of tuition, guaranteed for the full <span class="text-white font-semibold">4 years</span>.
+        </p>
       </div>
 
-      <!-- Scholarship Card -->
-      <div class="bg-kc-bg border border-kc-border rounded-3xl p-10 sm:p-14 flex flex-col items-center gap-5 kc-glow kc-reveal">
-        <div class="kc-text-gradient text-7xl sm:text-8xl md:text-9xl font-black leading-none">100%</div>
-        <p class="text-white font-bold text-xl sm:text-2xl">Tuition Waiver Available</p>
-        <p class="text-white/50 text-sm sm:text-base max-w-md">For the full 4-year duration, based on audition performance</p>
+      <!-- 4-Tier Scholarship Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5 kc-reveal" data-stagger>
+
+        <!-- Tier 1: 1st Place -->
+        <div data-tilt class="bg-kc-bg border-2 border-kc-accent/60 rounded-2xl p-6 flex flex-col items-center gap-2 kc-glow-hover">
+          <div class="spotlight"></div>
+          <span class="text-kc-accent text-xs font-semibold tracking-[0.2em] uppercase">1st Place</span>
+          <div class="kc-text-gradient text-5xl sm:text-6xl font-black leading-none my-1">100%</div>
+          <p class="text-white/80 text-sm font-semibold text-center">Full Tuition · 4 Years</p>
+          <p class="text-white/45 text-xs text-center leading-relaxed">Top global talent awarded at the K-STAR Audition</p>
+        </div>
+
+        <!-- Tier 2: 2nd Place -->
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col items-center gap-2 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="text-kc-accent text-xs font-semibold tracking-[0.2em] uppercase">2nd Place</span>
+          <div class="kc-text-gradient text-5xl sm:text-6xl font-black leading-none my-1">70%</div>
+          <p class="text-white/80 text-sm font-semibold text-center">Tuition · 4 Years</p>
+          <p class="text-white/45 text-xs text-center leading-relaxed">National-level runner-up performers</p>
+        </div>
+
+        <!-- Tier 3: 3rd Place -->
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col items-center gap-2 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="text-kc-accent text-xs font-semibold tracking-[0.2em] uppercase">3rd Place</span>
+          <div class="kc-text-gradient text-5xl sm:text-6xl font-black leading-none my-1">50%</div>
+          <p class="text-white/80 text-sm font-semibold text-center">Tuition · 4 Years</p>
+          <p class="text-white/45 text-xs text-center leading-relaxed">Distinguished audition performers</p>
+        </div>
+
+        <!-- Tier 4: Finalist -->
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col items-center gap-2 kc-card-hover">
+          <div class="spotlight"></div>
+          <span class="text-kc-accent text-xs font-semibold tracking-[0.2em] uppercase">Finalist</span>
+          <div class="kc-text-gradient text-5xl sm:text-6xl font-black leading-none my-1">30%</div>
+          <p class="text-white/80 text-sm font-semibold text-center">Tuition · 4 Years</p>
+          <p class="text-white/45 text-xs text-center leading-relaxed">All K-STAR Audition finalists</p>
+        </div>
+
+      </div>
+
+      <!-- Maintenance + Tuition Context -->
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 kc-reveal">
+        <div class="bg-kc-bg border border-kc-border rounded-xl p-6 flex items-start gap-4">
+          <i class="ph-fill ph-graduation-cap text-kc-accent text-3xl flex-shrink-0 mt-1"></i>
+          <div>
+            <h4 class="text-white font-bold text-base mb-2">Scholarship Maintenance</h4>
+            <p class="text-white/55 text-sm leading-relaxed">Keep your scholarship year after year by maintaining <span class="text-white/80 font-medium">GPA 3.0+ (on 4.5 scale)</span> and <span class="text-white/80 font-medium">80%+ attendance</span>.</p>
+          </div>
+        </div>
+        <div class="bg-kc-bg border border-kc-border rounded-xl p-6 flex items-start gap-4">
+          <i class="ph-fill ph-wallet text-kc-accent text-3xl flex-shrink-0 mt-1"></i>
+          <div>
+            <h4 class="text-white font-bold text-base mb-2">Transparent Tuition Structure</h4>
+            <p class="text-white/55 text-sm leading-relaxed">Full tuition is <span class="text-white/80 font-medium">KRW 6.7M per semester</span> (tuition KRW 5M + lab fee KRW 1.7M) — <span class="text-white/80 font-medium">KRW 13.4M / year</span>. Global payment support and installment plans available.</p>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -1323,5 +1397,12 @@
       });
     });
   </script>
+
+  <!-- K-Culture Assistant Chatbot Widget -->
+  <script
+    src="/assets/chatbot/chatbot.js"
+    data-worker="https://kc-chatbot.melbada1974.workers.dev"
+    defer
+  ></script>
 </body>
 </html>
