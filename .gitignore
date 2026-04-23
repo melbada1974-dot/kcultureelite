@@ -4,12 +4,25 @@
 # Superpowers brainstorming artifacts
 .superpowers/
 
-# Local preview screenshots
+# Local preview / QA screenshots (root-level PNGs)
 kc-*.png
 replicate-*.png
 chatbot-*.png
 live-*.png
 pr-step*.png
+# Apps Script + form wiring QA screenshots (Playwright verification)
+apps-script-*.png
+deploy-*.png
+manage-*.png
+edit-deployment.png
+oauth-consent.png
+redeploy-*.png
+version-*.png
+who-has-access-*.png
+sheet-after-*.png
+after-submit.png
+e2e-*.png
+research-*.png
 
 # Raw uploaded brand assets (copy into /assets/ before use, do not deploy)
 Bada logo*.png
