@@ -241,23 +241,46 @@ export REPLICATE_API_TOKEN=$(cat ~/.replicate-token)
 ### Sheet 유지보수
 - Sheet 꾸미기(헤더 보라 배경 + 흰 글자 + Bold + Center + Wrap)는 진주가 진행, Chris님이 나머지(Freeze 1 row, 컬럼 너비)는 직접 마감하시기로 함
 
-## 결제 시스템 (대기 중 · 2026-04-23 보류)
+## 결제 시스템 (Stripe AU 가입 진행 중 · 2026-04-23 Representative 단계에서 중단)
 
-히어로·풋터 두 CTA는 **통일 완료**(PR #6) — 둘 다 `openApplyForm()` 호출. 단 **Step 4는 현재 동의 체크박스만 있고 실제 "Pay" 버튼은 아직 없음**. 폼 Submit은 Apps Script POST + "Application Received" 화면으로 끝남. Payment instructions는 지원자 확인 이메일/성공 화면 모두에 "결제 안내가 별도 이메일로 갈 것"이라고 안내됨 (즉 현재는 수동 결제 플로우 전제).
+### 프론트엔드 (이미 배포됨)
+히어로·풋터 두 CTA는 **통일 완료**(PR #6) — 둘 다 `openApplyForm()` 호출. Step 4는 동의 체크박스(지원비/환불/장학구조) 3개이고 Submit 버튼 누르면 Apps Script에 row 기록 + 이메일 2종 발송 + "Application Received" 화면. **실제 "Pay" 버튼은 아직 없음**. Stripe 연결 시 이 Submit이 Stripe Checkout 리다이렉트로 자동 전환됨.
 
-- **방식**: Stripe Checkout via Cloudflare Worker (planned)
-- **금액**: KRW 30,000 (Rick 요청서 및 사이트 전반 통일 — 기존 문서의 $20 USD는 구 안)
+### Stripe 가입 현황 (호주 법인)
+| 항목 | 값 |
+|------|-----|
+| 가입 국가 | **Australia** (Stripe에 South Korea 없음 — 실측 확인, 46개국 중 미포함) |
+| 법인 | `Bada Global Pty Ltd` (Pty Ltd = Proprietary company) |
+| DBA | `K-Culture Elite` (법인명 ↔ 웹사이트 브랜드 연결) |
+| 로그인 이메일 | `chris@badagroups.com` (Chris 개인 이메일) |
+| Stripe Account ID | `acct_1TPMc4RwLLFioUzf` |
+| Test mode | 자동 활성화됨 (가입 직후) · `pk_test_*`/`sk_test_*` 이미 발급 |
+| Live mode | **대기 중** — Activation 플로우 중단점: Business Representative 단계 |
+
+### 지분/경영 구조 (KYC 심사 핵심)
+- Owners 50:50 — **Yun Kyung Kwon 50%** + **Jinjoo KWON 50%** (두 자매)
+- 경영권 단독 = **Yun Kyung Kwon** → Stripe Business Representative는 이 사람
+- Jinjoo KWON은 silent partner (지분만)
+- **Owners 단계에서 두 명 모두 beneficial owner로 등록 필요**
+
+### 블로커 (내일 가입 재개 전 준비)
+1. **Yun Kyung Kwon 여권** 사본 — 아직 없음. 대표자 신원증명 필요
+2. ASIC Directors 섹션에 Yun Kyung Kwon 단독인지, Jinjoo KWON도 함께 등록되어 있는지 확인
+3. Yun Kyung Kwon 개인 거주지 / 연락처
+
+### 남은 플로우 (내일)
+Business Representative → Business Owners (두 자매 등록) → Directors → Products or services → Public details → Bank (호주 법인 계좌, KB국민은행 한국 계좌는 사용 불가) → Secure (2FA) → Extras (세무) → Review & Submit → **Live 승인 대기 (보통 1영업일)**
+
+### 기술 작업 (가입 완료 후)
 - **Worker 이름**: `kc-checkout` (미생성)
+- **금액**: KRW 30,000 (Stripe가 AUD 환산 후 정산, Adaptive Pricing으로 고객 통화 자동 표시)
 - **프론트 훅**: `assets/apply/apply-form.js`의 `CHECKOUT_ENDPOINT` 상수 (현재 빈 문자열). 채워지면 Submit이 Apps Script POST → Stripe Checkout 리다이렉트로 자동 전환됨
-- **Stripe 계정**: Chris님 아직 미가입. 한국 법인 vs 호주 법인 중 어느 쪽으로 등록할지 결정 대기 (양쪽 다 법인 있음, 한국 법인에는 "BADA BLI" 상호 없음 — Statement Descriptor로 `KCULTURE ELITE` 쓰면 됨)
-- **Stripe 계정 생성 후 받을 것**: Test `pk_test_*` + `sk_test_*` API keys (승인 대기 중에도 Test mode는 즉시 사용 가능)
-- **필요 작업 (법인 결정 후 재개)**:
-  1. Chris 가입 + Test keys 확보 (30분)
-  2. Worker `kc-checkout` 개발: `/create-checkout-session` + `/webhook` (2~3h)
-  3. Apps Script v3: Sheet에 `Payment Status` 컬럼 추가, `?action=update` 쿼리로 Stripe webhook에서 applicationId로 행 업데이트 (1h)
-  4. `CHECKOUT_ENDPOINT` 채움 + `success.html` 개선 (30m)
-  5. Test mode E2E → Live 승인 → Live key 교체 → 실결제 1회 (1h)
-- **설정 메모**: Stripe Dashboard → Adaptive Pricing(고객 통화 자동 변환) + "Email customers about successful payments"(자동 영수증) 활성화 필요
+- **남은 작업 (Live 승인 후 순서대로)**:
+  1. Worker `kc-checkout` 개발: `/create-checkout-session` + `/webhook` (2~3h)
+  2. Apps Script v3: Sheet에 `Payment Status` 컬럼 추가, `?action=update` 쿼리로 Stripe webhook에서 applicationId로 행 업데이트 (1h)
+  3. `CHECKOUT_ENDPOINT` 채움 + `success.html` 개선 (30m)
+  4. Test mode E2E → Live key 교체 → 실결제 1회 검증 (1h)
+- **설정 메모**: Dashboard → Adaptive Pricing(고객 통화 자동 변환) + "Email customers about successful payments"(자동 영수증) 활성화 필요
 
 ## 주의 사항 (DO/DON'T)
 

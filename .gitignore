@@ -31,6 +31,20 @@ assets/B2B Korean University*.png
 # Source materials (local reference only, not deployed)
 Rick 수정방안 요청/
 
+# Sensitive legal/financial documents (Stripe KYC uploads, business registration, etc.)
+# Keep local only — NEVER commit or deploy
+assets/정부24*
+assets/사업자등록*
+assets/business-registration*
+assets/**/*.pdf
+assets/**/*.PDF
+assets/일반통장*
+assets/통장*
+assets/*Passport*
+assets/*passport*
+assets/Moon*Kwon*
+assets/*여권*
+
 # OS
 .DS_Store
 
