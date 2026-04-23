@@ -133,6 +133,7 @@
 
   <!-- K-Culture Assistant Chatbot Widget -->
   <link rel="stylesheet" href="/assets/chatbot/chatbot.css" />
+  <link rel="stylesheet" href="/assets/apply/apply-form.css" />
 </head>
 
 <body class="bg-kc-bg text-white font-sans antialiased">
@@ -149,7 +150,7 @@
     <div class="absolute inset-0 z-0">
       <video
         autoplay muted loop playsinline
-        poster="/bada%20bli%20hero%20sample%20pic.png"
+        poster="/assets/og-image.png"
         class="w-full h-full object-cover object-center"
       >
         <source src="/assets/hero-video.mp4" type="video/mp4">
@@ -186,16 +187,17 @@
         <span class="block kc-text-gradient">ELITE PROGRAM</span>
       </h1>
 
-      <!-- Apply Now Button -->
-      <a
-        href="#apply"
+      <!-- Apply Now Button → opens Application Form modal -->
+      <button
+        type="button"
         data-magnetic
+        onclick="openApplyForm()"
         class="inline-flex items-center gap-2 bg-kc-accent hover:bg-kc-accent-glow text-white font-semibold text-sm sm:text-base px-8 sm:px-10 py-3 sm:py-4 rounded-full transition-all duration-300 kc-glow kc-glow-hover"
-        aria-label="Apply Now for the Global K-Culture Elite Program"
+        aria-label="Open application form for the Global K-Culture Elite Program"
       >
         Apply Now
         <i class="ph ph-arrow-right text-lg"></i>
-      </a>
+      </button>
     </div>
 
     <!-- Scroll Indicator -->
@@ -1402,6 +1404,270 @@
       });
     });
   </script>
+
+  <!-- ============================================================
+       APPLICATION FORM MODAL (4-step wizard)
+       Logic: /assets/apply/apply-form.js (window.openApplyForm)
+       Data: Submits to Google Apps Script Web App once endpoint is set
+       ============================================================ -->
+  <div id="kc-apply-overlay" class="kc-apply-overlay" role="dialog" aria-modal="true" aria-labelledby="kc-apply-title">
+    <div class="kc-apply-modal" role="document">
+
+      <!-- Header -->
+      <div class="kc-apply-header">
+        <div class="kc-apply-title-block">
+          <p class="kc-apply-eyebrow">K-Culture Elite Program</p>
+          <h2 class="kc-apply-title" id="kc-apply-title">Application Form</h2>
+        </div>
+        <button id="kc-apply-close" class="kc-apply-close" aria-label="Close application form">
+          <i class="ph ph-x text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Progress -->
+      <div class="kc-apply-progress">
+        <div class="kc-apply-progress-track">
+          <div id="kc-apply-progress-fill" class="kc-apply-progress-fill"></div>
+        </div>
+        <p id="kc-apply-step-label" class="kc-apply-step-label">Step 1 of 4 — Personal Information</p>
+      </div>
+
+      <!-- Form Body -->
+      <div class="kc-apply-body">
+        <form id="kc-apply-form" autocomplete="on" novalidate>
+
+          <!-- Honeypot (anti-spam, invisible to humans) -->
+          <div class="kc-apply-honeypot" aria-hidden="true">
+            <label>Leave this field blank<input type="text" name="kc-apply-hp" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <!-- ============== STEP 1: Personal Information ============== -->
+          <div id="kc-apply-step-1" class="kc-apply-step kc-apply-step-active">
+            <h3 class="kc-apply-step-title">Personal Information</h3>
+            <p class="kc-apply-step-desc">Tell us about yourself. All fields must match your official passport.</p>
+
+            <div class="kc-apply-field">
+              <label class="kc-apply-label" for="fullName">Full Name<span class="kc-apply-required">*</span></label>
+              <input id="fullName" name="fullName" type="text" class="kc-apply-input" placeholder="As shown on your passport" data-required="true" autocomplete="name" />
+              <p class="kc-apply-error">Please enter your full name.</p>
+            </div>
+
+            <div class="kc-apply-field">
+              <label class="kc-apply-label" for="dob">Date of Birth<span class="kc-apply-required">*</span></label>
+              <input id="dob" name="dob" type="date" class="kc-apply-input" data-required="true" autocomplete="bday" />
+              <p class="kc-apply-error">Please enter your date of birth.</p>
+            </div>
+
+            <div class="kc-apply-field">
+              <label class="kc-apply-label">Gender<span class="kc-apply-required">*</span></label>
+              <div class="kc-apply-radio-group" data-required="true" data-group="radio" data-name="gender">
+                <label class="kc-apply-radio">
+                  <input type="radio" name="gender" value="Male">
+                  <span class="kc-apply-radio-label">Male</span>
+                </label>
+                <label class="kc-apply-radio">
+                  <input type="radio" name="gender" value="Female">
+                  <span class="kc-apply-radio-label">Female</span>
+                </label>
+                <label class="kc-apply-radio">
+                  <input type="radio" name="gender" value="Other">
+                  <span class="kc-apply-radio-label">Other</span>
+                </label>
+              </div>
+              <p class="kc-apply-error">Please select an option.</p>
+            </div>
+
+            <div class="kc-apply-field">
+              <label class="kc-apply-label" for="nationality">Nationality<span class="kc-apply-required">*</span></label>
+              <input id="nationality" name="nationality" type="text" class="kc-apply-input" placeholder="e.g. Korean, Japanese, American" data-required="true" autocomplete="country-name" />
+              <p class="kc-apply-error">Please enter your nationality.</p>
+            </div>
+
+            <div class="kc-apply-field">
+              <label class="kc-apply-label" for="contactNumber">Contact Number<span class="kc-apply-required">*</span></label>
+              <input id="contactNumber" name="contactNumber" type="tel" class="kc-apply-input" placeholder="+82-10-1234-5678" data-required="true" autocomplete="tel" />
+              <p class="kc-apply-hint">Please include your country code.</p>
+              <p class="kc-apply-error">Please enter a contact number.</p>
+            </div>
+
+            <div class="kc-apply-field">
+              <label class="kc-apply-label" for="email">Email Address<span class="kc-apply-required">*</span></label>
+              <input id="email" name="email" type="email" class="kc-apply-input" placeholder="you@example.com" data-required="true" autocomplete="email" />
+              <p class="kc-apply-error">Please enter a valid email address.</p>
+            </div>
+          </div>
+
+          <!-- ============== STEP 2: Background & Interest ============== -->
+          <div id="kc-apply-step-2" class="kc-apply-step">
+            <h3 class="kc-apply-step-title">Background &amp; Interest</h3>
+            <p class="kc-apply-step-desc">Help us understand your goals and background so we can guide you to the right track.</p>
+
+            <div class="kc-apply-field">
+              <label class="kc-apply-label">Main Interest Track<span class="kc-apply-required">*</span></label>
+              <p class="kc-apply-hint" style="margin-bottom:8px;">Select all that apply.</p>
+              <div class="kc-apply-checkbox-list" data-required="true" data-group="checkbox" data-name="interestTracks">
+                <label class="kc-apply-checkbox">
+                  <input type="checkbox" name="interestTracks" value="K-Pop Business">
+                  <span class="kc-apply-checkbox-text">K-Pop Business</span>
+                </label>
+                <label class="kc-apply-checkbox">
+                  <input type="checkbox" name="interestTracks" value="K-Performance">
+                  <span class="kc-apply-checkbox-text">K-Performance</span>
+                </label>
+                <label class="kc-apply-checkbox">
+                  <input type="checkbox" name="interestTracks" value="K-Beauty Business">
+                  <span class="kc-apply-checkbox-text">K-Beauty Business</span>
+                </label>
+                <label class="kc-apply-checkbox">
+                  <input type="checkbox" name="interestTracks" value="K-Fusion Media & Content">
+                  <span class="kc-apply-checkbox-text">K-Fusion Media &amp; Content</span>
+                </label>
+                <label class="kc-apply-checkbox">
+                  <input type="checkbox" name="interestTracks" value="Global Entertainment Startup">
+                  <span class="kc-apply-checkbox-text">Global Entertainment Startup</span>
+                </label>
+              </div>
+              <p class="kc-apply-error">Please select at least one track.</p>
+            </div>
+
+            <div class="kc-apply-field">
+              <label class="kc-apply-label" for="educationalBackground">Educational Background<span class="kc-apply-required">*</span></label>
+              <input id="educationalBackground" name="educationalBackground" type="text" class="kc-apply-input" placeholder="e.g. High School Diploma, Bachelor's in Music" data-required="true" />
+              <p class="kc-apply-hint">Your highest level of education or current studies.</p>
+              <p class="kc-apply-error">Please enter your educational background.</p>
+            </div>
+
+            <div class="kc-apply-field">
+              <label class="kc-apply-label">Korean Language Proficiency<span class="kc-apply-required">*</span></label>
+              <div class="kc-apply-scale" data-required="true" data-group="radio" data-name="koreanProficiency">
+                <span class="kc-apply-scale-label">Beginner</span>
+                <div class="kc-apply-scale-options">
+                  <label class="kc-apply-scale-opt">
+                    <input type="radio" name="koreanProficiency" value="1">
+                    <span class="kc-apply-scale-opt-label">1</span>
+                  </label>
+                  <label class="kc-apply-scale-opt">
+                    <input type="radio" name="koreanProficiency" value="2">
+                    <span class="kc-apply-scale-opt-label">2</span>
+                  </label>
+                  <label class="kc-apply-scale-opt">
+                    <input type="radio" name="koreanProficiency" value="3">
+                    <span class="kc-apply-scale-opt-label">3</span>
+                  </label>
+                  <label class="kc-apply-scale-opt">
+                    <input type="radio" name="koreanProficiency" value="4">
+                    <span class="kc-apply-scale-opt-label">4</span>
+                  </label>
+                  <label class="kc-apply-scale-opt">
+                    <input type="radio" name="koreanProficiency" value="5">
+                    <span class="kc-apply-scale-opt-label">5</span>
+                  </label>
+                </div>
+                <span class="kc-apply-scale-label">Fluent</span>
+              </div>
+              <p class="kc-apply-error">Please rate your Korean proficiency.</p>
+            </div>
+          </div>
+
+          <!-- ============== STEP 3: Audition Submission ============== -->
+          <div id="kc-apply-step-3" class="kc-apply-step">
+            <h3 class="kc-apply-step-title">Audition Submission</h3>
+            <p class="kc-apply-step-desc">Share your 3-minute audition video and tell us about your career vision.</p>
+
+            <div class="kc-apply-field">
+              <label class="kc-apply-label" for="auditionVideoLink">Audition Video Link<span class="kc-apply-required">*</span></label>
+              <input id="auditionVideoLink" name="auditionVideoLink" type="url" class="kc-apply-input" placeholder="https://youtube.com/... or https://drive.google.com/..." data-required="true" />
+              <p class="kc-apply-hint">YouTube or Google Drive link. Please set visibility to public or anyone with the link.</p>
+              <p class="kc-apply-error">Please enter a valid video URL (must start with http:// or https://).</p>
+            </div>
+
+            <div class="kc-apply-field">
+              <label class="kc-apply-label" for="selfIntroduction">Self-Introduction &amp; Career Goals<span class="kc-apply-required">*</span></label>
+              <textarea id="selfIntroduction" name="selfIntroduction" class="kc-apply-textarea" rows="6" placeholder="Describe why you want to become a K-Culture expert and how this program will empower your career." data-required="true" data-min="100"></textarea>
+              <p class="kc-apply-hint">Minimum 100 characters (a few thoughtful sentences — feel free to write more if you'd like).</p>
+              <p class="kc-apply-error">Please write at least 100 characters.</p>
+            </div>
+          </div>
+
+          <!-- ============== STEP 4: Payment & Refund Policy ============== -->
+          <div id="kc-apply-step-4" class="kc-apply-step">
+            <h3 class="kc-apply-step-title">Payment &amp; Refund Policy</h3>
+            <p class="kc-apply-step-desc">Application fee: <strong style="color:#fff;">KRW 30,000</strong>. Please review and confirm the following before submitting.</p>
+
+            <div class="kc-apply-field">
+              <div class="kc-apply-checkbox-list">
+                <label class="kc-apply-checkbox">
+                  <input type="checkbox" name="feeAcknowledgement" value="Yes" data-required="true">
+                  <span class="kc-apply-checkbox-text"><strong style="color:#fff;">Application Fee Acknowledgement.</strong><br>I agree to pay the application fee of KRW 30,000.</span>
+                </label>
+              </div>
+              <p class="kc-apply-error">Please confirm the fee acknowledgement.</p>
+            </div>
+
+            <div class="kc-apply-field">
+              <div class="kc-apply-checkbox-list">
+                <label class="kc-apply-checkbox">
+                  <input type="checkbox" name="refundPolicyConfirmation" value="Yes" data-required="true">
+                  <span class="kc-apply-checkbox-text"><strong style="color:#fff;">Refund Policy Confirmation.</strong><br>I understand that 50% (KRW 15,000) of the fee is refundable only if I do not pass the first audition round. No refunds are provided for withdrawals or second-round failures.</span>
+                </label>
+              </div>
+              <p class="kc-apply-error">Please confirm the refund policy.</p>
+            </div>
+
+            <div class="kc-apply-field">
+              <div class="kc-apply-checkbox-list">
+                <label class="kc-apply-checkbox">
+                  <input type="checkbox" name="tuitionScholarshipReview" value="Yes" data-required="true">
+                  <span class="kc-apply-checkbox-text"><strong style="color:#fff;">Tuition &amp; Scholarship Review.</strong><br>I have reviewed the full tuition structure and understand that scholarships are awarded based on audition results (100% / 70% / 50% / 30% tiers).</span>
+                </label>
+              </div>
+              <p class="kc-apply-error">Please confirm the tuition and scholarship review.</p>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- Success Screen -->
+        <div id="kc-apply-success" class="kc-apply-success">
+          <div class="kc-apply-success-icon">
+            <i class="ph-fill ph-check-circle"></i>
+          </div>
+          <h3 class="kc-apply-success-title">Application Received</h3>
+          <p class="kc-apply-success-text">
+            Thank you for applying to the K-Culture Elite Program. We&rsquo;ve received your application and will review your audition video within 48 hours.
+          </p>
+          <div class="kc-apply-success-next">
+            <p class="kc-apply-success-next-title">What happens next</p>
+            <ol class="kc-apply-success-next-list">
+              <li>You&rsquo;ll receive a confirmation email shortly.</li>
+              <li>Payment instructions (KRW 30,000) will follow in a separate email.</li>
+              <li>Our admissions team will contact shortlisted candidates within 48 hours.</li>
+            </ol>
+          </div>
+          <p class="kc-apply-success-text" style="font-size:12px;opacity:0.55;">
+            Questions? Email us at <a href="mailto:global@badaglobal-bli.com" style="color:#C084FC;">global@badaglobal-bli.com</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Footer (Navigation) -->
+      <div id="kc-apply-footer" class="kc-apply-footer">
+        <button id="kc-apply-prev" type="button" class="kc-apply-btn kc-apply-btn-prev">
+          <i class="ph ph-arrow-left"></i> Back
+        </button>
+        <button id="kc-apply-next" type="button" class="kc-apply-btn kc-apply-btn-next">
+          Next <i class="ph ph-arrow-right"></i>
+        </button>
+        <button id="kc-apply-submit" type="button" class="kc-apply-btn kc-apply-btn-submit" style="display:none;">
+          Submit Application <i class="ph ph-paper-plane-tilt"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Application Form Logic -->
+  <script src="/assets/apply/apply-form.js" defer></script>
 
   <!-- K-Culture Assistant Chatbot Widget -->
   <script
