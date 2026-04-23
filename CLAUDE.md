@@ -211,19 +211,53 @@ export REPLICATE_API_TOKEN=$(cat ~/.replicate-token)
   - 월 예산 하드캡: $30 USD (Anthropic Console)
   - 자동 재충전: 잔액 $5 이하 시 $15 (최대 월 $30 경계 안)
   - 알림 이메일: $15·$25 도달 시
-- **Phase 3 확장 예정**: Apply Now 폼 + Stripe 결제 → D1 `applications`·`payments` 테이블(스키마 이미 정의됨) 활용
+## 지원서 폼 + Google Sheet 연동 (2026-04-23 완료, PR #5·#6)
 
-## 결제 시스템 (Phase 3 예정)
+사이트 상단 히어로 + 하단 Apply 섹션의 "Apply Now" 버튼 둘 다 동일한 4-step 모달을 엽니다. 제출 시 Google Apps Script Web App에 POST → 연결된 Sheet에 행 기록 + 지원자 확인 이메일 + 관리자(`global@badaglobal-bli.com`) 알림 이메일 자동 발송.
 
-- **방식**: Stripe Checkout via Cloudflare Worker
-- **금액**: $20 USD (추후 변경 가능)
-- **Worker 이름**: `k-culture-checkout` (미생성)
-- **현재 상태**: `handleCheckout()` 함수가 Worker URL을 호출하는 플레이스홀더 상태
-- **필요 작업**:
-  1. Stripe 계정 생성 (https://dashboard.stripe.com/register)
-  2. Cloudflare Worker 생성 + `STRIPE_SECRET_KEY` 환경 변수 설정
-  3. `handleCheckout()` 연동 테스트
-  4. `success.html` 리다이렉트 확인
+### 구성 요소
+
+| 항목 | 값 |
+|------|-----|
+| 프론트 CSS | `assets/apply/apply-form.css` (다크 테마 모달, 400+ lines) |
+| 프론트 JS | `assets/apply/apply-form.js` (4-step wizard + validation + Apps Script POST) |
+| 모달 HTML | `index.html` 내 `#kc-apply-overlay` (약 280 lines) |
+| Google Sheet | `Kcultureelite Form` (id `13gRfL_MNDnxLJBh_zIs2h9POQmNv5Jz7WyNOumLAGi4`) · Sheet1 |
+| Apps Script | `Kcultureelite Form Handler` (id `1QNXk8iTLhqL-9BBqlVpshWYf59s7weNTZg3rr-_WSIM8LWROVvQZjFe2`) |
+| Web App URL | `https://script.google.com/macros/s/AKfycbyADn1u0ctWqRhooiY4lUX8Q_R7mYl976CvTmavoknqOkrTnqzRvVDfV9bjw9QwYtgB/exec` |
+| 계정 | `global@badaglobal-bli.com` (Ricky LEE) |
+
+### 폼 구조 (Rick 2026-04-19 요청서 Section 1~4 기반)
+- **Step 1 Personal**: Full Name / DOB / Gender / Nationality / Contact Number / Email
+- **Step 2 Background**: Interest Tracks (5개 체크박스) / Education / Korean Proficiency 1~5
+- **Step 3 Audition**: Video URL / Self-Introduction (최소 100자)
+- **Step 4 Payment & Refund Policy**: 3개 동의 체크박스 (지원비 KRW 30,000 / 환불 정책 / 장학 구조 검토)
+- Submit 시 applicationId(UUID) + paymentStatus=`pending` 자동 부여 (Stripe 연결 시 webhook이 이 ID로 매칭 예정)
+
+### Apps Script v2 — 전화번호 수식 버그 수정 포함
+- `doPost` 내부에 `escapeFormula()` 유틸: `+`, `=`, `-`, `@`로 시작하는 값 앞에 `'`를 붙여 Sheet가 수식으로 해석하지 못하게 함 (초기 v1에서 `+82-10-...`이 `-6840`으로 저장되던 버그 수정)
+- 동시에 `MailApp.sendEmail` 두 번 호출 (지원자 + 관리자)
+
+### Sheet 유지보수
+- Sheet 꾸미기(헤더 보라 배경 + 흰 글자 + Bold + Center + Wrap)는 진주가 진행, Chris님이 나머지(Freeze 1 row, 컬럼 너비)는 직접 마감하시기로 함
+
+## 결제 시스템 (대기 중 · 2026-04-23 보류)
+
+히어로·풋터 두 CTA는 **통일 완료**(PR #6) — 둘 다 `openApplyForm()` 호출. 단 **Step 4는 현재 동의 체크박스만 있고 실제 "Pay" 버튼은 아직 없음**. 폼 Submit은 Apps Script POST + "Application Received" 화면으로 끝남. Payment instructions는 지원자 확인 이메일/성공 화면 모두에 "결제 안내가 별도 이메일로 갈 것"이라고 안내됨 (즉 현재는 수동 결제 플로우 전제).
+
+- **방식**: Stripe Checkout via Cloudflare Worker (planned)
+- **금액**: KRW 30,000 (Rick 요청서 및 사이트 전반 통일 — 기존 문서의 $20 USD는 구 안)
+- **Worker 이름**: `kc-checkout` (미생성)
+- **프론트 훅**: `assets/apply/apply-form.js`의 `CHECKOUT_ENDPOINT` 상수 (현재 빈 문자열). 채워지면 Submit이 Apps Script POST → Stripe Checkout 리다이렉트로 자동 전환됨
+- **Stripe 계정**: Chris님 아직 미가입. 한국 법인 vs 호주 법인 중 어느 쪽으로 등록할지 결정 대기 (양쪽 다 법인 있음, 한국 법인에는 "BADA BLI" 상호 없음 — Statement Descriptor로 `KCULTURE ELITE` 쓰면 됨)
+- **Stripe 계정 생성 후 받을 것**: Test `pk_test_*` + `sk_test_*` API keys (승인 대기 중에도 Test mode는 즉시 사용 가능)
+- **필요 작업 (법인 결정 후 재개)**:
+  1. Chris 가입 + Test keys 확보 (30분)
+  2. Worker `kc-checkout` 개발: `/create-checkout-session` + `/webhook` (2~3h)
+  3. Apps Script v3: Sheet에 `Payment Status` 컬럼 추가, `?action=update` 쿼리로 Stripe webhook에서 applicationId로 행 업데이트 (1h)
+  4. `CHECKOUT_ENDPOINT` 채움 + `success.html` 개선 (30m)
+  5. Test mode E2E → Live 승인 → Live key 교체 → 실결제 1회 (1h)
+- **설정 메모**: Stripe Dashboard → Adaptive Pricing(고객 통화 자동 변환) + "Email customers about successful payments"(자동 영수증) 활성화 필요
 
 ## 주의 사항 (DO/DON'T)
 
