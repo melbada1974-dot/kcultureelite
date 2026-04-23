@@ -2,7 +2,7 @@
    K-Culture Elite — Application Form Logic
    - 4-step wizard with client-side validation
    - Honeypot anti-spam
-   - Submit is a placeholder until Apps Script Web App URL is set
+   - Submit: records application (status=pending) + redirects to Stripe Checkout
    ============================================================ */
 (function () {
   'use strict';
@@ -19,6 +19,13 @@
   // Handler project: Kcultureelite Form Handler (global@badaglobal-bli.com)
   // Linked Sheet: Kcultureelite Form (Sheet1) — appends a row + sends applicant+admin emails
   const SUBMIT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyADn1u0ctWqRhooiY4lUX8Q_R7mYl976CvTmavoknqOkrTnqzRvVDfV9bjw9QwYtgB/exec';
+
+  // Cloudflare Worker endpoint that creates a Stripe Checkout Session and
+  // returns { url } to redirect the applicant to Stripe-hosted checkout.
+  // Empty string = not configured yet (Stripe account pending). In that state the
+  // form falls back to the legacy "application submitted" success screen so the
+  // site keeps working while Stripe is being set up.
+  const CHECKOUT_ENDPOINT = '';
 
   let currentStep = 1;
   let isSubmitting = false;
@@ -248,8 +255,16 @@
 
     data.submittedAt = new Date().toISOString();
     data.source = 'kcultureelite.com';
+    data.applicationId = generateApplicationId();
+    data.paymentStatus = 'pending';
 
     return data;
+  }
+
+  function generateApplicationId() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+    const rand = Math.random().toString(36).slice(2, 10);
+    return `kc-${Date.now().toString(36)}-${rand}`;
   }
 
   async function submitForm() {
@@ -261,7 +276,7 @@
     const originalLabel = submitBtn?.innerHTML;
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Submitting...';
+      submitBtn.innerHTML = CHECKOUT_ENDPOINT ? 'Preparing payment...' : 'Submitting...';
     }
 
     const data = collectFormData();
@@ -280,12 +295,30 @@
           body: JSON.stringify(data)
         });
       } else {
-        // No endpoint configured yet — keep data in console for dev preview
         console.info('[kc-apply] SUBMIT_ENDPOINT not configured. Preview:', data);
-        await new Promise((r) => setTimeout(r, 600)); // fake latency
       }
+
+      if (CHECKOUT_ENDPOINT) {
+        const res = await fetch(CHECKOUT_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            applicationId: data.applicationId,
+            email: data.email,
+            fullName: data.fullName
+          })
+        });
+        if (!res.ok) throw new Error('Checkout session failed: ' + res.status);
+        const json = await res.json();
+        if (!json.url) throw new Error('No checkout URL returned');
+        window.location.href = json.url;
+        return;
+      }
+
+      // Stripe endpoint not yet configured — show the legacy confirmation screen
       showSuccess();
     } catch (err) {
+      console.error('[kc-apply] submit error:', err);
       alert('Something went wrong submitting your application. Please try again or email global@badaglobal-bli.com');
       if (submitBtn) {
         submitBtn.disabled = false;

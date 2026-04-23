@@ -1221,13 +1221,14 @@
         </div>
       </div>
 
-      <!-- CTA Button -->
+      <!-- CTA Button — unified with hero CTA (opens the same 4-step wizard) -->
       <div class="kc-reveal">
         <button
-          id="checkout-btn"
+          type="button"
           data-magnetic
-          onclick="handleCheckout()"
+          onclick="openApplyForm()"
           class="inline-flex items-center gap-3 bg-kc-accent hover:bg-kc-accent-glow text-white font-bold text-base sm:text-lg px-10 sm:px-14 py-4 sm:py-5 rounded-full transition-all duration-300 kc-glow kc-glow-hover kc-pulse mb-4"
+          aria-label="Open application form (includes KRW 30,000 application fee payment)"
         >
           Apply Now — ₩30,000
           <i class="ph ph-arrow-right text-xl"></i>
@@ -1303,29 +1304,6 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
     })();
-
-    // Stripe Checkout (placeholder — Cloudflare Worker will be set up in Task 12)
-    async function handleCheckout() {
-        const btn = document.getElementById('checkout-btn');
-        btn.textContent = 'Processing...';
-        btn.disabled = true;
-        try {
-            const res = await fetch('https://k-culture-checkout.melbada1974.workers.dev', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-            });
-            const data = await res.json();
-            if (data.url) {
-                window.location.href = data.url;
-            } else {
-                throw new Error('No checkout URL');
-            }
-        } catch (err) {
-            alert('Payment system is temporarily unavailable. Please try again or contact global@badaglobal-bli.com');
-            btn.textContent = 'Apply Now — ₩30,000';
-            btn.disabled = false;
-        }
-    }
 
     // Enhanced GSAP Scroll Reveal
     gsap.registerPlugin(ScrollTrigger);
