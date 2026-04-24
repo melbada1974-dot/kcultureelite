@@ -45,6 +45,11 @@ assets/*passport*
 assets/Moon*Kwon*
 assets/*여권*
 
+# Stripe onboarding screenshots (contain account IDs, personal info, business details)
+# Local reference only — NEVER commit or deploy
+stripe-screenshots/
+stripe-*.png
+
 # OS
 .DS_Store
 
