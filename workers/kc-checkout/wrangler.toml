@@ -1,0 +1,16 @@
+name = "kc-checkout"
+main = "src/index.ts"
+compatibility_date = "2026-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ENV = "production"
+STRIPE_PRICE_ID = "price_1TQQBnRwLLFioUzfZqViVaKO"
+SUCCESS_URL = "https://kcultureelite.com/success.html?session_id={CHECKOUT_SESSION_ID}"
+CANCEL_URL = "https://kcultureelite.com/?cancelled=true"
+# APPS_SCRIPT_WEBHOOK_URL is set after Apps Script v3 deploy
+APPS_SCRIPT_WEBHOOK_URL = ""
+
+# Secrets set via `wrangler secret put`:
+#   STRIPE_SECRET_KEY      — sk_test_* (dev) or sk_live_* (prod)
+#   STRIPE_WEBHOOK_SECRET  — whsec_* from Stripe Dashboard webhook endpoint

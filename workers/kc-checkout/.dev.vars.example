@@ -1,0 +1,13 @@
+# Copy this file to `.dev.vars` and fill in the values for local development.
+# `.dev.vars` is gitignored. NEVER commit real secrets.
+# For production, use `wrangler secret put <NAME>`.
+
+# Stripe API secret key (Test mode for local dev)
+STRIPE_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Stripe webhook signing secret (from Dashboard → Webhooks → endpoint → Signing secret)
+STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Shared secret with Apps Script v3 (must match Apps Script's APPS_SCRIPT_TOKEN property)
+# Generate a random value: `openssl rand -hex 32`
+APPS_SCRIPT_TOKEN=replace_me_with_random_64_char_hex
