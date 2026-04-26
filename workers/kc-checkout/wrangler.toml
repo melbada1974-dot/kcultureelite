@@ -6,11 +6,12 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 ENV = "production"
 STRIPE_PRICE_ID = "price_1TQQBnRwLLFioUzfZqViVaKO"
-SUCCESS_URL = "https://kcultureelite.com/success.html?session_id={CHECKOUT_SESSION_ID}"
-CANCEL_URL = "https://kcultureelite.com/?cancelled=true"
-# APPS_SCRIPT_WEBHOOK_URL is set after Apps Script v3 deploy
-APPS_SCRIPT_WEBHOOK_URL = ""
+# Embedded Checkout returns the user to this URL after payment completes.
+# The {CHECKOUT_SESSION_ID} placeholder is replaced by Stripe.
+RETURN_URL = "https://kcultureelite.com/success.html?session_id={CHECKOUT_SESSION_ID}"
+APPS_SCRIPT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyADn1u0ctWqRhooiY4lUX8Q_R7mYl976CvTmavoknqOkrTnqzRvVDfV9bjw9QwYtgB/exec"
 
 # Secrets set via `wrangler secret put`:
 #   STRIPE_SECRET_KEY      — sk_test_* (dev) or sk_live_* (prod)
 #   STRIPE_WEBHOOK_SECRET  — whsec_* from Stripe Dashboard webhook endpoint
+#   APPS_SCRIPT_TOKEN      — shared secret with Apps Script v3 (Properties)

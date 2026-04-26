@@ -20,15 +20,20 @@
   // Linked Sheet: Kcultureelite Form (Sheet1) — appends a row + sends applicant+admin emails
   const SUBMIT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyADn1u0ctWqRhooiY4lUX8Q_R7mYl976CvTmavoknqOkrTnqzRvVDfV9bjw9QwYtgB/exec';
 
-  // Cloudflare Worker endpoint that creates a Stripe Checkout Session and
-  // returns { url } to redirect the applicant to Stripe-hosted checkout.
-  // Empty string = not configured yet (Stripe account pending). In that state the
-  // form falls back to the legacy "application submitted" success screen so the
-  // site keeps working while Stripe is being set up.
-  const CHECKOUT_ENDPOINT = '';
+  // Cloudflare Worker endpoint (kc-checkout) that creates a Stripe Embedded
+  // Checkout Session and returns { clientSecret } to mount Stripe.js inside
+  // the modal. POST body: { applicationId, email, fullName }.
+  // Worker source: workers/kc-checkout/ (deployed via wrangler deploy).
+  // Empty string = not configured yet → form falls back to legacy success screen.
+  const CHECKOUT_ENDPOINT = 'https://kc-checkout.melbada1974.workers.dev/create-checkout-session';
+
+  // Stripe publishable key (safe to expose in frontend code).
+  // K-Culture Elite Live account (Bada Global Pty Ltd, AU).
+  const STRIPE_PUBLISHABLE_KEY = 'pk_live_51TPMc4RwLLFioUzfiF1WSU9bhBo1XPV471nNjDTtKHmmtFzurHHjq5qmt2X0w5RyqlBl7tyRUXFDxv8t4E1Cy2DK00iloHQzOp';
 
   let currentStep = 1;
   let isSubmitting = false;
+  let stripeCheckout = null; // current Stripe Embedded Checkout instance
 
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
@@ -54,8 +59,11 @@
 
     // If success screen is showing, always allow close
     const successActive = $('#kc-apply-success')?.classList.contains('kc-apply-success-active');
+    // Once payment view is mounted, the row is already saved — allow closing
+    // without confirmation (the user can return to pay later via email link).
+    const paymentActive = $('#kc-apply-payment')?.classList.contains('kc-apply-payment-active');
 
-    if (!force && !successActive && hasUserInput()) {
+    if (!force && !successActive && !paymentActive && hasUserInput()) {
       const ok = confirm('Are you sure you want to close? Your application will not be saved.');
       if (!ok) return;
     }
@@ -84,10 +92,21 @@
       el.classList.remove('kc-apply-invalid')
     );
     $('#kc-apply-success')?.classList.remove('kc-apply-success-active');
+    $('#kc-apply-payment')?.classList.remove('kc-apply-payment-active');
+    if (stripeCheckout) {
+      try { stripeCheckout.destroy(); } catch (_) { /* ignore */ }
+      stripeCheckout = null;
+    }
+    const paymentStatus = $('#kc-apply-payment-status');
+    if (paymentStatus) {
+      paymentStatus.classList.remove('kc-apply-payment-status-error', 'kc-apply-payment-status-hidden');
+      paymentStatus.innerHTML = '<i class="ph ph-spinner-gap"></i> Preparing secure payment form&hellip;';
+    }
     $$('.kc-apply-step').forEach((step) => step.classList.remove('kc-apply-step-active'));
     $('#kc-apply-step-1')?.classList.add('kc-apply-step-active');
     $('#kc-apply-form').style.display = '';
     $('#kc-apply-footer').style.display = '';
+    isSubmitting = false;
     updateProgress();
   }
 
@@ -310,8 +329,8 @@
         });
         if (!res.ok) throw new Error('Checkout session failed: ' + res.status);
         const json = await res.json();
-        if (!json.url) throw new Error('No checkout URL returned');
-        window.location.href = json.url;
+        if (!json.clientSecret) throw new Error('No client_secret returned');
+        await showPayment(json.clientSecret);
         return;
       }
 
@@ -323,6 +342,52 @@
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalLabel || 'Submit Application';
+      }
+      isSubmitting = false;
+    }
+  }
+
+  async function showPayment(clientSecret) {
+    $('#kc-apply-form').style.display = 'none';
+    $('#kc-apply-footer').style.display = 'none';
+    $('#kc-apply-payment')?.classList.add('kc-apply-payment-active');
+
+    const paymentStatus = $('#kc-apply-payment-status');
+
+    if (typeof window.Stripe !== 'function') {
+      if (paymentStatus) {
+        paymentStatus.classList.add('kc-apply-payment-status-error');
+        paymentStatus.innerHTML = '<i class="ph ph-warning"></i> Stripe.js failed to load. Please reload the page or email global@badaglobal-bli.com.';
+      }
+      isSubmitting = false;
+      return;
+    }
+
+    try {
+      if (stripeCheckout) {
+        try { stripeCheckout.destroy(); } catch (_) { /* ignore */ }
+        stripeCheckout = null;
+      }
+      const stripe = window.Stripe(STRIPE_PUBLISHABLE_KEY);
+      stripeCheckout = await stripe.initEmbeddedCheckout({
+        clientSecret: clientSecret,
+        onComplete: () => {
+          if (stripeCheckout) {
+            try { stripeCheckout.destroy(); } catch (_) { /* ignore */ }
+            stripeCheckout = null;
+          }
+          $('#kc-apply-payment')?.classList.remove('kc-apply-payment-active');
+          showSuccess();
+        }
+      });
+      stripeCheckout.mount('#kc-checkout-element');
+      if (paymentStatus) paymentStatus.classList.add('kc-apply-payment-status-hidden');
+      isSubmitting = false;
+    } catch (err) {
+      console.error('[kc-apply] embedded checkout init failed:', err);
+      if (paymentStatus) {
+        paymentStatus.classList.add('kc-apply-payment-status-error');
+        paymentStatus.innerHTML = '<i class="ph ph-warning"></i> Failed to load payment form. Please try again or email global@badaglobal-bli.com';
       }
       isSubmitting = false;
     }

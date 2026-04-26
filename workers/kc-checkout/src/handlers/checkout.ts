@@ -51,10 +51,10 @@ export async function handleCreateCheckoutSession(
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      ui_mode: "embedded",
       line_items: [{ price: env.STRIPE_PRICE_ID, quantity: 1 }],
       customer_email: email,
-      success_url: env.SUCCESS_URL,
-      cancel_url: env.CANCEL_URL,
+      return_url: env.RETURN_URL,
       client_reference_id: applicationId,
       metadata: {
         applicationId,
@@ -69,12 +69,15 @@ export async function handleCreateCheckoutSession(
       },
     });
 
-    if (!session.url) {
-      return jsonError("checkout session created without url", 500);
+    if (!session.client_secret) {
+      return jsonError("checkout session created without client_secret", 500);
     }
 
     return new Response(
-      JSON.stringify({ url: session.url, sessionId: session.id }),
+      JSON.stringify({
+        clientSecret: session.client_secret,
+        sessionId: session.id,
+      }),
       { status: 200, headers: { "content-type": "application/json" } },
     );
   } catch (error) {

@@ -1,8 +1,7 @@
 export interface Env {
   ENV: string;
   STRIPE_PRICE_ID: string;
-  SUCCESS_URL: string;
-  CANCEL_URL: string;
+  RETURN_URL: string;
   APPS_SCRIPT_WEBHOOK_URL: string;
   STRIPE_SECRET_KEY: string;
   STRIPE_WEBHOOK_SECRET: string;
@@ -16,7 +15,7 @@ export interface CheckoutSessionRequest {
 }
 
 export interface CheckoutSessionResponse {
-  url: string;
+  clientSecret: string;
   sessionId: string;
 }
 

@@ -67,6 +67,9 @@
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
 
+  <!-- Stripe.js (used by the in-modal Embedded Checkout in apply-form.js) -->
+  <script src="https://js.stripe.com/v3/"></script>
+
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4X4L6N4JJ7"></script>
   <script>
@@ -1604,6 +1607,19 @@
           </div>
 
         </form>
+
+        <!-- Payment Screen: Stripe Embedded Checkout mounts inside #kc-checkout-element -->
+        <div id="kc-apply-payment" class="kc-apply-payment">
+          <h3 class="kc-apply-step-title">Complete your payment</h3>
+          <p class="kc-apply-step-desc">
+            Application fee: <strong style="color:#fff;">KRW 30,000</strong>. Secure payment powered by Stripe.
+            Pay with card, Apple Pay, Google Pay, or Link &mdash; whatever your device supports.
+          </p>
+          <div id="kc-apply-payment-status" class="kc-apply-payment-status">
+            <i class="ph ph-spinner-gap"></i> Preparing secure payment form&hellip;
+          </div>
+          <div id="kc-checkout-element"></div>
+        </div>
 
         <!-- Success Screen -->
         <div id="kc-apply-success" class="kc-apply-success">

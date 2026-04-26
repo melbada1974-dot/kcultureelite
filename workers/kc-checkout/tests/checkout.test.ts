@@ -5,8 +5,7 @@ import type { Env } from "../src/types";
 const baseEnv: Env = {
   ENV: "test",
   STRIPE_PRICE_ID: "price_test_xxx",
-  SUCCESS_URL: "https://kcultureelite.com/success.html?session_id={CHECKOUT_SESSION_ID}",
-  CANCEL_URL: "https://kcultureelite.com/?cancelled=true",
+  RETURN_URL: "https://kcultureelite.com/success.html?session_id={CHECKOUT_SESSION_ID}",
   APPS_SCRIPT_WEBHOOK_URL: "",
   STRIPE_SECRET_KEY: "sk_test_dummy",
   STRIPE_WEBHOOK_SECRET: "whsec_dummy",

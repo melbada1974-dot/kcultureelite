@@ -3,32 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application Submitted | Global K-Culture Elite Program</title>
+    <title>Payment Complete | Global K-Culture Elite Program</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
-            theme: { extend: { colors: { 'kc-bg': '#0A0A0A', 'kc-accent': '#A855F7' }, fontFamily: { sans: ['Inter', 'sans-serif'] } } }
+            theme: { extend: { colors: { 'kc-bg': '#0A0A0A', 'kc-card': '#111111', 'kc-accent': '#A855F7', 'kc-border': 'rgba(255,255,255,0.1)' }, fontFamily: { sans: ['Inter', 'sans-serif'] } } }
         }
     </script>
 </head>
-<body class="bg-kc-bg text-white font-sans min-h-screen flex items-center justify-center">
-    <div class="text-center px-6 max-w-lg">
+<body class="bg-kc-bg text-white font-sans min-h-screen flex items-center justify-center px-6 py-12">
+    <div class="text-center max-w-xl w-full">
+        <!-- Check icon -->
         <div class="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-8">
             <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
             </svg>
         </div>
-        <h1 class="text-3xl md:text-4xl font-bold mb-4">Application Received!</h1>
-        <p class="text-white/60 mb-8 leading-relaxed">
+
+        <h1 class="text-3xl md:text-4xl font-bold mb-3">Payment Complete</h1>
+        <p class="text-kc-accent text-sm md:text-base font-medium mb-8 tracking-wide">Your application is now under review.</p>
+
+        <p class="text-white/70 mb-10 leading-relaxed">
             Thank you for applying to the Global K-Culture Elite Program.
-            You will receive a confirmation email at the address you provided.
-            Our team will review your submission and get back to you within 7 business days.
+            We've recorded your application fee and you'll receive a confirmation email shortly.
+            Our admissions team will review your submission and get back to you within
+            <span class="text-white font-semibold">7 business days</span>.
         </p>
+
+        <!-- Next steps card -->
+        <div class="bg-kc-card border border-kc-border rounded-2xl p-6 md:p-8 mb-10 text-left">
+            <h2 class="text-lg font-semibold mb-4 text-kc-accent">What happens next</h2>
+            <ol class="space-y-3 text-white/80 text-sm md:text-base list-decimal list-inside">
+                <li>Confirmation email arrives at the address you provided.</li>
+                <li>Audition video and self-introduction reviewed by Lead Faculty.</li>
+                <li>Shortlisted applicants are invited to an in-person evaluation.</li>
+                <li>Final decisions are sent within 7 business days.</li>
+            </ol>
+        </div>
+
+        <!-- Session reference (small) -->
+        <p id="kc-session-ref" class="text-white/30 text-xs mb-8 font-mono break-all"></p>
+
         <a href="/" class="inline-block bg-kc-accent text-white font-semibold px-8 py-3 rounded-full hover:bg-purple-500 transition-colors">
             Back to Program
         </a>
+
+        <p class="text-white/40 text-xs mt-8">
+            Questions? Email us at
+            <a href="mailto:global@badaglobal-bli.com" class="text-kc-accent hover:underline">global@badaglobal-bli.com</a>
+        </p>
     </div>
+
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const sessionId = params.get('session_id');
+            const ref = document.getElementById('kc-session-ref');
+            if (sessionId && ref) {
+                ref.textContent = 'Payment reference: ' + sessionId;
+            }
+        })();
+    </script>
 </body>
 </html>
