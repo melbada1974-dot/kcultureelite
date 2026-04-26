@@ -19,7 +19,8 @@ Global K-Culture Elite Program 랜딩 페이지 — Bada BLI ✕ 동양대학교
 - **2026-04-20** Elite Faculty 22명 프로필 (Tier 1 Accordion 6 + Tier 2 Flip 16), GFPGAN AI 얼굴 복원
 - **2026-04-20 저녁** 챗봇 Phase 1 배포 (Cloudflare Worker + D1 + Haiku 4.5)
 - **2026-04-23** 지원서 4-step 모달 + Google Sheet/Apps Script 연동 (PR #5·#6)
-- **2026-04-23~** Stripe AU 가입 진행 중 (Representative 단계에서 중단)
+- **2026-04-23** Stripe AU 가입 시작 (Representative 단계에서 중단)
+- **2026-04-26** Stripe AU Live 활성화 완료 + Application Fee Product 등록 (Jinjoo KWON ID 검증만 진행 중)
 - 자세한 변경 이력은 `git log`
 
 ## 파일 구조
@@ -119,33 +120,47 @@ Kim Sang Hyun, Kim Eunsun, Jin Hyun Jin (Dance), Yoon Jaea, Jung Minyoung, Lee J
 
 **Apps Script v2 버그 수정**: `escapeFormula()` 유틸로 `+`/`=`/`-`/`@` 시작 값 앞에 `'` 붙임 — v1의 `+82-10-...` → `-6840` 저장 버그 수정.
 
-## 결제 시스템 (Stripe AU · Representative 단계 중단)
+## 결제 시스템 (Stripe AU · Live 활성화 + Product 등록 완료)
 
 **프론트엔드**: Step 4 Submit이 Apps Script로 기록·메일 발송만 함. `assets/apply/apply-form.js`의 `CHECKOUT_ENDPOINT` 상수 비어 있음 — 채워지면 Stripe Checkout 리다이렉트로 자동 전환.
 
-### Stripe 가입 현황
+### Stripe 계정 (2026-04-26 Live 활성화)
 | 항목 | 값 |
 |------|-----|
 | 가입 국가 | **Australia** (Stripe는 South Korea 미지원 실측 확인) |
 | 법인 | `Bada Global Pty Ltd` · DBA `K-Culture Elite` |
 | 로그인 | `chris@badagroups.com` |
 | Account ID | `acct_1TPMc4RwLLFioUzf` |
-| Test mode | 활성화됨 (`pk_test_*`/`sk_test_*` 발급) |
-| Live mode | 대기 — Business Representative 단계에서 중단 |
+| API keys | `pk_live_*` / `sk_live_*` 발급 완료 (Test key도 별도 sandbox에서 발급) |
+| Statement descriptor | `KCULTUREELITE.COM` (카드 명세서 표시 — 도메인 일치) |
+| Customer support phone | `+61 424 684 664` |
+| Adaptive Pricing | **ON** (Settings → Payments → Adaptive Pricing — Checkout/Elements/Invoice 자동 환전) |
 
-**지분 구조 (KYC 핵심)**: Yun Kyung Kwon 50% (경영권 단독 → Representative) + Jinjoo KWON 50% (silent). 두 명 모두 Owners 단계에서 beneficial owner 등록 필요.
+### Product / Price (2026-04-26 등록)
+| 항목 | 값 |
+|------|-----|
+| Product name | `K-Culture Elite Application Fee` |
+| **Product ID** | `prod_UPEfbycf1ZU9VY` |
+| **Price ID** | `price_1TQQBnRwLLFioUzfZqViVaKO` |
+| Pricing model | One-off (단발성) |
+| Currency / Amount | KRW 30,000 (zero-decimal — `unit_amount: 30000`) |
+| Description | One-time application review fee for the K-Culture Elite Program — a 4-year degree program in Korean cultural industries jointly operated by Bada Global Pty Ltd and Dongyang University, South Korea. |
 
-**블로커 (재개 전 준비)**: ① Yun Kyung Kwon 여권 사본 ② ASIC Directors 섹션 확인 (단독 여부) ③ YKK 개인 거주지/연락처
+### 지분 구조 / KYC 진행 상태
+- **Yun Kyung Kwon** 50% — 경영권 단독, Business Representative ✅ 검증 완료
+- **Jinjoo KWON** 50% — Owner/Director/Executive · 거주지 21 Thornbury Way, Williams Landing VIC 3027 AU · 이메일 `ceo@badagroups.com` · 🟡 **ID verification 진행 중** (2026-04-26 캐나다 출장 중 모바일 진행, 24h 만료)
+- **Payouts paused 상태** — Jinjoo 검증 완료 시까지 출금만 정지 (결제 받기는 가능)
 
-**남은 플로우**: Representative → Owners(두 자매) → Directors → Products → Public details → Bank(호주 법인 계좌) → Secure(2FA) → Extras(세무) → Review & Submit → Live 승인 (~1영업일)
+### 남은 작업 (Live 활성화 됐으므로 코드 작업만 남음)
+1. Worker `kc-checkout` 개발 — `/create-checkout-session` (Price ID 참조 + applicationId metadata) + `/webhook` (`checkout.session.completed`) (2~3h)
+2. Apps Script v3 — `Payment Status` 컬럼 추가 + `?action=update` webhook 훅 (applicationId로 행 업데이트) (1h)
+3. `apply-form.js`의 `CHECKOUT_ENDPOINT` 채움 + `success.html` 개선 (30m)
+4. Test E2E (Test key) → Live key 교체 → 실결제 1회 검증 (1h)
 
-**Live 승인 후 기술 작업**:
-1. Worker `kc-checkout` 개발 — `/create-checkout-session` + `/webhook` (2~3h)
-2. Apps Script v3 — `Payment Status` 컬럼 + `?action=update` webhook 훅 (1h)
-3. `CHECKOUT_ENDPOINT` 채움 + `success.html` 개선 (30m)
-4. Test E2E → Live key → 실결제 1회 검증 (1h)
-
-**설정 메모**: Adaptive Pricing + "Email customers about successful payments" 활성화. 금액 KRW 30,000 (Stripe가 AUD 환산, 고객 통화 자동 표시).
+### 설정 메모
+- Payout schedule: **Manual** (수동 출금 — 사업 초기 안전)
+- Stripe Tax / Stripe Climate: 둘 다 **Skip** (나중에 필요 시 활성화)
+- "Email customers about successful payments": Settings에서 활성화 권장 (자동 영수증)
 
 ## DO / DON'T
 
