@@ -21,6 +21,7 @@ Global K-Culture Elite Program 랜딩 페이지 — Bada BLI ✕ 동양대학교
 - **2026-04-23** 지원서 4-step 모달 + Google Sheet/Apps Script 연동 (PR #5·#6)
 - **2026-04-23** Stripe AU 가입 시작 (Representative 단계에서 중단)
 - **2026-04-26** Stripe AU Live 활성화 완료 + Application Fee Product 등록 (Jinjoo KWON ID 검증만 진행 중)
+- **2026-04-27** 결제 시스템 E2E 완성: Worker `kc-checkout` 배포 + Apps Script v3.1 + Stripe Webhook 등록 + Embedded Checkout 모달 내 결제 + 실결제 1회 검증·환불 완료
 - 자세한 변경 이력은 `git log`
 
 ## 파일 구조
@@ -120,47 +121,71 @@ Kim Sang Hyun, Kim Eunsun, Jin Hyun Jin (Dance), Yoon Jaea, Jung Minyoung, Lee J
 
 **Apps Script v2 버그 수정**: `escapeFormula()` 유틸로 `+`/`=`/`-`/`@` 시작 값 앞에 `'` 붙임 — v1의 `+82-10-...` → `-6840` 저장 버그 수정.
 
-## 결제 시스템 (Stripe AU · Live 활성화 + Product 등록 완료)
+## 결제 시스템 (Stripe AU Live · Embedded Checkout · E2E 완료 2026-04-27)
 
-**프론트엔드**: Step 4 Submit이 Apps Script로 기록·메일 발송만 함. `assets/apply/apply-form.js`의 `CHECKOUT_ENDPOINT` 상수 비어 있음 — 채워지면 Stripe Checkout 리다이렉트로 자동 전환.
+**플로우**: Step 4 Submit → Apps Script v3.1 doPost (Sheet 행 추가, Application ID/`paymentStatus=pending` 부여 + 이메일 2종 발송) → Worker `/create-checkout-session` (clientSecret 반환) → 모달 내부 Stripe Embedded Checkout (Apple Pay/Google Pay/Link/카드 자동) → 결제 완료 → Stripe webhook → Worker `/webhook` (서명 검증) → Apps Script `?action=update` (token 인증) → 같은 행의 `Payment Status='paid'` + Stripe Session ID/Amount/Currency/Paid At 업데이트.
 
-### Stripe 계정 (2026-04-26 Live 활성화)
+### Stripe 계정
 | 항목 | 값 |
 |------|-----|
-| 가입 국가 | **Australia** (Stripe는 South Korea 미지원 실측 확인) |
-| 법인 | `Bada Global Pty Ltd` · DBA `K-Culture Elite` |
-| 로그인 | `chris@badagroups.com` |
-| Account ID | `acct_1TPMc4RwLLFioUzf` |
-| API keys | `pk_live_*` / `sk_live_*` 발급 완료 (Test key도 별도 sandbox에서 발급) |
-| Statement descriptor | `KCULTUREELITE.COM` (카드 명세서 표시 — 도메인 일치) |
-| Customer support phone | `+61 424 684 664` |
-| Adaptive Pricing | **ON** (Settings → Payments → Adaptive Pricing — Checkout/Elements/Invoice 자동 환전) |
+| 가입 국가 | **Australia** (South Korea 미지원) |
+| 법인 / DBA | `Bada Global Pty Ltd` · `K-Culture Elite` |
+| 로그인 / Account ID | `chris@badagroups.com` · `acct_1TPMc4RwLLFioUzf` |
+| Live API keys | `pk_live_51TPMc4RwLLFioUzfiF1WSU9bhBo1XPV4...` (frontend) · `sk_live_*` (Worker secret) |
+| Statement descriptor | `KCULTUREELITE.COM` (도메인 일치) |
+| Adaptive Pricing | **ON** (고객 위치별 KRW/AUD/USD 자동 환전) |
+| Payout schedule | Manual |
+| Stripe Tax / Climate | Skip |
 
-### Product / Price (2026-04-26 등록)
+### Product / Price
 | 항목 | 값 |
 |------|-----|
-| Product name | `K-Culture Elite Application Fee` |
-| **Product ID** | `prod_UPEfbycf1ZU9VY` |
-| **Price ID** | `price_1TQQBnRwLLFioUzfZqViVaKO` |
-| Pricing model | One-off (단발성) |
-| Currency / Amount | KRW 30,000 (zero-decimal — `unit_amount: 30000`) |
-| Description | One-time application review fee for the K-Culture Elite Program — a 4-year degree program in Korean cultural industries jointly operated by Bada Global Pty Ltd and Dongyang University, South Korea. |
+| Product name | `K-Culture Elite Application Fee` (One-off, KRW 30,000 zero-decimal) |
+| Product ID | `prod_UPEfbycf1ZU9VY` |
+| Price ID | `price_1TQQBnRwLLFioUzfZqViVaKO` |
+
+### Worker `kc-checkout` (배포 완료)
+| 항목 | 값 |
+|------|-----|
+| 소스 | `workers/kc-checkout/` (TypeScript, Stripe SDK, zod, Vitest 7 tests) |
+| URL | `https://kc-checkout.melbada1974.workers.dev` |
+| 엔드포인트 | `POST /create-checkout-session` (zod 검증 + `ui_mode='embedded'`) · `POST /webhook` (서명 검증 + Apps Script 알림) · `GET /health` |
+| Vars | `STRIPE_PRICE_ID` · `RETURN_URL` (`https://kcultureelite.com/success.html?session_id={CHECKOUT_SESSION_ID}`) · `APPS_SCRIPT_WEBHOOK_URL` |
+| Secrets | `STRIPE_SECRET_KEY` · `STRIPE_WEBHOOK_SECRET` · `APPS_SCRIPT_TOKEN` (모두 `wrangler secret put`) |
+| 재배포 | `cd workers/kc-checkout && npm run deploy` |
+
+### Stripe Webhook
+| 항목 | 값 |
+|------|-----|
+| Endpoint ID | `we_1TQSWXRwLLFioUzfYyRoG3am` (Name `vibrant-brilliance`) |
+| URL | `https://kc-checkout.melbada1974.workers.dev/webhook` |
+| Events | `checkout.session.completed` (1개) |
+| API version | `2026-03-25.dahlia` |
+| Signing secret | `whsec_*` → Worker `STRIPE_WEBHOOK_SECRET`로 동기화 완료 |
+
+### Apps Script v3.1
+| 항목 | 값 |
+|------|-----|
+| 소스 | `apps-script/Code.gs` (로컬 백업) |
+| Web App URL | `https://script.google.com/macros/s/AKfycbyADn1u0ctWqRhooiY4lUX8Q.../exec` (CLAUDE.md 위 frontend 섹션과 동일 — 새 버전이지만 URL 유지) |
+| Active deployment | Version 4 (2026-04-27) |
+| 핸들러 | 기본 doPost = 폼 행 추가 + 이메일 2종 / `?action=update` = Payment Status 업데이트 (token 인증) |
+| Sheet 자동 헤더 | `ensureHeaders()`가 첫 호출 시 A~V 22컬럼 자동 추가 + 보라색 스타일 적용 |
+| Properties | `APPS_SCRIPT_TOKEN` (Worker와 공유) · `ADMIN_EMAIL` = `global@badaglobal-bli.com` |
+
+### Sheet (`Kcultureelite Form`)
+- ID: `13gRfL_MNDnxLJBh_zIs2h9POQmNv5Jz7WyNOumLAGi4`
+- 컬럼 22개: A Submitted At · B Full Name · C DOB · D Gender · E Nationality · F Contact · G Email · H Education · I Korean · J Tracks · K Audition · L Self-Intro · M Fee Ack · N Refund · O Tuition · P Source · Q Application ID · R Payment Status · S Stripe Session · T Amount · U Currency · V Paid At
+- ⚠️ Apps Script v3.1의 payload key 이름은 `apply-form.js` `collectFormData()`와 정확히 매칭됨 (dob/educationalBackground/auditionVideoLink/feeAcknowledgement/refundPolicyConfirmation/tuitionScholarshipReview)
 
 ### 지분 구조 / KYC 진행 상태
-- **Yun Kyung Kwon** 50% — 경영권 단독, Business Representative ✅ 검증 완료
-- **Jinjoo KWON** 50% — Owner/Director/Executive · 거주지 21 Thornbury Way, Williams Landing VIC 3027 AU · 이메일 `ceo@badagroups.com` · 🟡 **ID verification 진행 중** (2026-04-26 캐나다 출장 중 모바일 진행, 24h 만료)
-- **Payouts paused 상태** — Jinjoo 검증 완료 시까지 출금만 정지 (결제 받기는 가능)
+- **Yun Kyung Kwon** 50% (경영권 단독, Business Representative) ✅ 검증 완료
+- **Jinjoo KWON** 50% (Owner/Director/Executive · 호주 Williams Landing 거주 · `ceo@badagroups.com`) · 🟡 **ID verification 진행 중** (2026-04-26 캐나다 출장 중 모바일 진행 — 24h 링크 만료)
+- **Payouts paused** 상태 — 결제는 정상 처리·기록되지만 호주 계좌로의 출금만 정지 (Jinjoo 검증 완료 시 자동 해제)
 
-### 남은 작업 (Live 활성화 됐으므로 코드 작업만 남음)
-1. Worker `kc-checkout` 개발 — `/create-checkout-session` (Price ID 참조 + applicationId metadata) + `/webhook` (`checkout.session.completed`) (2~3h)
-2. Apps Script v3 — `Payment Status` 컬럼 추가 + `?action=update` webhook 훅 (applicationId로 행 업데이트) (1h)
-3. `apply-form.js`의 `CHECKOUT_ENDPOINT` 채움 + `success.html` 개선 (30m)
-4. Test E2E (Test key) → Live key 교체 → 실결제 1회 검증 (1h)
-
-### 설정 메모
-- Payout schedule: **Manual** (수동 출금 — 사업 초기 안전)
-- Stripe Tax / Stripe Climate: 둘 다 **Skip** (나중에 필요 시 활성화)
-- "Email customers about successful payments": Settings에서 활성화 권장 (자동 영수증)
+### E2E 검증 (2026-04-27 완료)
+- Chris 카드로 KRW 30,000 실결제 (Stripe Link) → Sheet 행 추가 + `Payment Status='paid'` 업데이트 확인 → Stripe Dashboard에서 환불 처리 (5~10영업일 내 카드 복귀)
+- Apps Script v3.1 키 매칭 검증은 curl로 별도 row 추가 후 모든 22컬럼 정상 채워짐 확인
 
 ## DO / DON'T
 

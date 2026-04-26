@@ -69,15 +69,17 @@ function handleApplicationSubmit(e) {
   const applicationId = payload.applicationId || generateUuid();
   const paymentStatus = payload.paymentStatus || 'pending';
 
+  // Field names below MUST match the keys produced by collectFormData() in
+  // assets/apply/apply-form.js. Mismatches silently write empty cells.
   const row = [
-    new Date().toISOString(),
-    s(payload.fullName), s(payload.dateOfBirth), s(payload.gender), s(payload.nationality),
-    s(payload.contactNumber), s(payload.email), s(payload.education), s(payload.koreanProficiency),
+    s(payload.submittedAt) || new Date().toISOString(),
+    s(payload.fullName), s(payload.dob), s(payload.gender), s(payload.nationality),
+    s(payload.contactNumber), s(payload.email), s(payload.educationalBackground), s(payload.koreanProficiency),
     Array.isArray(payload.interestTracks) ? payload.interestTracks.join(', ') : s(payload.interestTracks),
-    s(payload.auditionVideoUrl), s(payload.selfIntroduction),
-    payload.feeAcknowledged ? 'Yes' : 'No',
-    payload.refundPolicyAgreed ? 'Yes' : 'No',
-    payload.tuitionScholarshipAgreed ? 'Yes' : 'No',
+    s(payload.auditionVideoLink), s(payload.selfIntroduction),
+    s(payload.feeAcknowledgement),
+    s(payload.refundPolicyConfirmation),
+    s(payload.tuitionScholarshipReview),
     s(payload.source) || 'kcultureelite.com',
     applicationId, paymentStatus, '', '', '', '',
   ].map(escapeFormula);
@@ -248,10 +250,10 @@ function sendAdminEmail(p, applicationId) {
     'Email: ' + s(p.email),
     'Contact: ' + s(p.contactNumber),
     'Nationality: ' + s(p.nationality),
-    'Education: ' + s(p.education),
+    'Education: ' + s(p.educationalBackground),
     'Korean Proficiency: ' + s(p.koreanProficiency),
     'Interest Tracks: ' + (Array.isArray(p.interestTracks) ? p.interestTracks.join(', ') : s(p.interestTracks)),
-    'Audition Video: ' + s(p.auditionVideoUrl),
+    'Audition Video: ' + s(p.auditionVideoLink),
     'Self-Intro: ' + s(p.selfIntroduction),
     '',
     'Open the sheet to review: https://docs.google.com/spreadsheets/d/13gRfL_MNDnxLJBh_zIs2h9POQmNv5Jz7WyNOumLAGi4/edit',
