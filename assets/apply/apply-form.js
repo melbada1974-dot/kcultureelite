@@ -25,7 +25,7 @@
   // the modal. POST body: { applicationId, email, fullName }.
   // Worker source: workers/kc-checkout/ (deployed via wrangler deploy).
   // Empty string = not configured yet → form falls back to legacy success screen.
-  const CHECKOUT_ENDPOINT = 'https://kc-checkout.melbada1974.workers.dev/create-checkout-session';
+  const CHECKOUT_ENDPOINT = 'https://pay.kcultureelite.com/create-checkout-session';
 
   // Stripe publishable key (safe to expose in frontend code).
   // K-Culture Elite Live account (Bada Global Pty Ltd, AU).
